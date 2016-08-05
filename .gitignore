@@ -1,0 +1,6 @@
+nextcloud/
+ncdev/
+keeweb-source/
+keeweb/build/
+keeweb/templates/keeweb.php
+keeweb/templates/manifest.appcache.php

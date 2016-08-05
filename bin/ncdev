@@ -1,0 +1,2 @@
+#!/bin/sh
+PYTHONPATH="$(dirname "$(realpath "$0")"/../ncdev" python -m ncdev "${@}"

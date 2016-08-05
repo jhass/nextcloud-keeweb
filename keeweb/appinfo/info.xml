@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<info>
+    <id>keeweb</id>
+    <name>Keeweb</name>
+    <description>Open Keepass stores inside Nextcloud with Keeweb.</description>
+    <licence>AGPL</licence>
+    <author>Jonne Haß</author>
+    <version>0.1.0</version>
+    <namespace>Keeweb</namespace>
+    <website>https://github.com/jhass/nextcloud-keeweb</website>
+    <category>tool</category>
+    <dependencies>
+        <owncloud min-version="9" max-version="9" />
+    </dependencies>
+</info>

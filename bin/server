@@ -1,0 +1,3 @@
+#!/bin/sh
+cd "$(dirname "$(realpath "$0")")/../nextcloud"
+php -S 0.0.0.0:8090
