@@ -37,6 +37,7 @@ class PageController extends Controller {
 		// Override default CSP
 		$csp = new ContentSecurityPolicy();
 		$csp->addAllowedFrameDomain("'self'");
+		$csp->addAllowedChildSrcDomain("'self'");
 		$response->setContentSecurityPolicy($csp);
 		return $response;
 	}
