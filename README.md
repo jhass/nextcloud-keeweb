@@ -5,6 +5,8 @@
 
 This integrates the two with each other.
 
+![demo](https://cloud.aeshna.de/u/mrzyx/keeweb.gif)
+
 ## Install
 
 Go to the releases page, download the latest version, extract to `your_nextcloud/apps`.
