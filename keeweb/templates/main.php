@@ -1,4 +1,5 @@
 <?php
+script('keeweb', 'script');
 style('keeweb', 'style');
 ?>
 
