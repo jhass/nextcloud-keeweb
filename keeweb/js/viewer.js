@@ -22,12 +22,12 @@
         OC.PERMISSION_UPDATE,
         OC.imagePath('core', 'actions/edit'),
         function (fileName, context) {
-          var dir = context.dir;
-          if (dir === '/') {
-            dir = '';
-          }
-
-          window.location = '/index.php/apps/keeweb/?open=' + dir + '/' + fileName;
+          OC.redirect(
+            OC.generateUrl(
+              'apps/keeweb/?open={file}',
+              {'file': OC.joinPaths(context.dir, fileName)}
+            )
+          );
         },
         t('keeweb', 'Open')
       );

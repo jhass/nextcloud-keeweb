@@ -4,7 +4,7 @@ CACHE MANIFEST
 # updmin:v0.0.0
 
 CACHE:
-/index.php/apps/keeweb
+keeweb
 
 NETWORK:
 *

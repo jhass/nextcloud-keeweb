@@ -12,10 +12,25 @@
 namespace OCA\Keeweb\AppInfo;
 
 use OCP\AppFramework\App;
+use OCA\Keeweb\Controller\PageController;
 
 require_once __DIR__ . '/autoload.php';
 
-$app = new App('keeweb');
+class Application extends App {
+ public function __construct(array $urlParams=array()){
+        parent::__construct('keeweb', $urlParams);
+        $container = $this->getContainer();
+        $container->registerService('PageController', function($c) {
+            return new PageController(
+                $c->query('AppName'),
+                $c->query('Request'),
+                $c->query('ServerContainer')->getURLGenerator()
+            );
+        });
+    }
+}
+
+$app = new Application();
 $container = $app->getContainer();
 
 $container->query('OCP\INavigationManager')->add(function () use ($container) {

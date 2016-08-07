@@ -12,6 +12,7 @@
 namespace OCA\Keeweb\Controller;
 
 use OCP\IRequest;
+use OCP\IURLGenerator;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
@@ -19,9 +20,11 @@ use OCP\AppFramework\Controller;
 
 class PageController extends Controller {
 
+	private $urlGenerator;
 
-	public function __construct($AppName, IRequest $request, $UserId){
+	public function __construct($AppName, IRequest $request, IURLGenerator $urlGenerator){
 		parent::__construct($AppName, $request);
+		$this->urlGenerator = $urlGenerator;
 	}
 
 	/**
@@ -29,7 +32,7 @@ class PageController extends Controller {
 	 * @NoCSRFRequired
 	 */
 	public function index($open) {
-		$params = [];
+		$params = ['keeweb' => $this->urlGenerator->linkToRoute('keeweb.page.keeweb')];
 		if (isset($open)) {
 			$params['config'] = 'config?file='.$open;
 		}

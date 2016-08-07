@@ -1,5 +1,5 @@
-nextcloud-keeweb (0.3.0)
-
+nextcloud-keeweb (0.2.1)
+* Use URL generators everywhere
 
 nextcloud-keeweb (0.2.0)
 * Cleanup duplicate files in history
