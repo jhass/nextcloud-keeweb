@@ -18,7 +18,7 @@
     // Get any open parameter
     open = window.location.search.match(/open=([^&]+)/);
     if (open) {
-      open = open[1];
+      open = decodeURIComponent(open[1]);
     }
 
     fileInfos = fileInfos.filter(function(fileInfo) {

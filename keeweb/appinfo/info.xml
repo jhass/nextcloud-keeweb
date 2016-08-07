@@ -5,7 +5,7 @@
     <description>Open Keepass stores inside Nextcloud with Keeweb.</description>
     <licence>AGPL</licence>
     <author>Jonne Haß</author>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
     <namespace>Keeweb</namespace>
     <website>https://github.com/jhass/nextcloud-keeweb</website>
     <category>tool</category>

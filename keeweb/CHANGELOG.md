@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.2.2)
+* Fix cleaning open parameter from history
+
 nextcloud-keeweb (0.2.1)
 * Use URL generators everywhere
 
