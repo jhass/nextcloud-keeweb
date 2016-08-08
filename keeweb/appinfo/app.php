@@ -88,7 +88,7 @@ $request = \OC::$server->getRequest();
 if (isset($request->server['REQUEST_URI'])) {
 	$url = $request->server['REQUEST_URI'];
 
-	if (preg_match('%index.php/apps/files(/.*)?%', $url)) {
+	if (preg_match('%apps/files(/.*)?%', $url)) {
 		\OCP\Util::addScript('keeweb', 'viewer');
 	}
 }

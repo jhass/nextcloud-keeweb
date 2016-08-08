@@ -1,5 +1,6 @@
 nextcloud-keeweb (0.2.2)
 * Fix cleaning open parameter from history
+* Improve URL detection for script injection into the files app
 
 nextcloud-keeweb (0.2.1)
 * Use URL generators everywhere
