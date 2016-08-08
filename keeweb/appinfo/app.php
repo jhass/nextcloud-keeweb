@@ -82,13 +82,11 @@ class Hooks {
 
 \OC_Hook::connect('OC_App', 'pre_disable', '\OCA\Keeweb\AppInfo\Hooks', 'pre_disable');
 
-// From documents app
 // Script for registering file actions
-$request = \OC::$server->getRequest();
-if (isset($request->server['REQUEST_URI'])) {
-	$url = $request->server['REQUEST_URI'];
-
-	if (preg_match('%apps/files(/.*)?%', $url)) {
+$eventDispatcher = \OC::$server->getEventDispatcher();
+$eventDispatcher->addListener(
+	'OCA\Files::loadAdditionalScripts',
+	function() {
 		\OCP\Util::addScript('keeweb', 'viewer');
 	}
-}
+);

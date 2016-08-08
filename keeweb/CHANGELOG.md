@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.2.3)
+* Use EventDispatcher to hook into files app
+
 nextcloud-keeweb (0.2.2)
 * Fix cleaning open parameter from history
 * Improve URL detection for script injection into the files app
