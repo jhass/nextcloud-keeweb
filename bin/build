@@ -10,10 +10,11 @@ cd "$(dirname "$(realpath "$0")")/../keeweb-source"
 
 version="$1"
 
+git clean -xf
 git fetch
 git checkout .
 git checkout "$version"
-git clean -xf
+git symbolic-ref -q HEAD && git pull || true
 
 npm uninstall --save-dev electron-prebuilt
 npm uninstall --save-dev electron-builder
@@ -26,3 +27,4 @@ git apply < ../default_settings.patch
 
 grunt
 cp dist/index.html ../keeweb/templates/keeweb.php
+sed -i 's|<?xml version="1.0"|<?php echo "<?xml version=\\"1.0\\""; ?>|g' ../keeweb/templates/keeweb.php

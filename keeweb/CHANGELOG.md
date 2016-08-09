@@ -1,5 +1,6 @@
 nextcloud-keeweb (0.2.3)
 * Use EventDispatcher to hook into files app
+* Workaround XML tags being picked up as PHP short tags
 
 nextcloud-keeweb (0.2.2)
 * Fix cleaning open parameter from history
