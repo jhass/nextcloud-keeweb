@@ -80,19 +80,23 @@ class PageController extends Controller {
 	 */
 	public function config($file) {
 		$csrfToken = \OC::$server->getCSRFTokenManager()->getToken()->getEncryptedValue();
-		$webdavBase = $this->request->getServerProtocol().'://'.$this->request->getServerHost().'/remote.php/webdav';
+		$webdavBase = \OCP\Util::linkToRemote('webdav');
 		$config = [
 			'settings' => (object) null,
 			'files' => [
 				[
 					'storage' => 'webdav',
-    			'name' => $file.' on Nextcloud',
-    			'path' => $webdavBase.$file.'?requesttoken='.urlencode($csrfToken),
-    			"options" => ['user' => null, 'password' => null]
-    		]
-    	]
-    ];
+					'name' => $file.' on '.\OCP\Util::getServerHost(),
+					'path' => $this->joinPaths($webdavBase, $file.'?requesttoken='.urlencode($csrfToken)),
+					"options" => ['user' => null, 'password' => null]
+				]
+			]
+		];
 
-    return new JSONResponse($config);
+		return new JSONResponse($config);
+	}
+
+	private function joinPaths($base, $path) {
+		return rtrim($base, '/').'/'.ltrim($path, '/');
 	}
 }
