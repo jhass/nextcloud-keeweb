@@ -1,10 +1,11 @@
 CACHE MANIFEST
 
-# YYYY-MM-DD:v0.0.0
-# updmin:v0.0.0
+# <?php echo $_['version']; ?>
+
 
 CACHE:
-keeweb
+<?php echo $_['keeweb']; ?>
+
 
 NETWORK:
 *

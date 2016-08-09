@@ -13,6 +13,7 @@ namespace OCA\Keeweb\Controller;
 
 use OCP\IRequest;
 use OCP\IURLGenerator;
+use \OCP\IConfig;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
@@ -21,10 +22,12 @@ use OCP\AppFramework\Controller;
 class PageController extends Controller {
 
 	private $urlGenerator;
+	private $settings;
 
-	public function __construct($AppName, IRequest $request, IURLGenerator $urlGenerator){
+	public function __construct($AppName, IRequest $request, IURLGenerator $urlGenerator, IConfig $settings) {
 		parent::__construct($AppName, $request);
 		$this->urlGenerator = $urlGenerator;
+		$this->settings = $settings;
 	}
 
 	/**
@@ -64,7 +67,9 @@ class PageController extends Controller {
 	 * @NoCSRFRequired
 	 */
 	public function manifest() {
-		$response = new TemplateResponse("keeweb", "manifest.appcache", array(), "blank");
+		$params = ['keeweb' => $this->urlGenerator->linkToRoute('keeweb.page.keeweb'),
+							 'version' => $this->settings->getAppValue($this->appName, 'installed_version')];
+		$response = new TemplateResponse("keeweb", "manifest.appcache", $params, "blank");
 		$response->addHeader("Content-Type", "text/plain");
 		return $response;
 	}

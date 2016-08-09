@@ -24,7 +24,8 @@ class Application extends App {
             return new PageController(
                 $c->query('AppName'),
                 $c->query('Request'),
-                $c->query('ServerContainer')->getURLGenerator()
+                $c->query('ServerContainer')->getURLGenerator(),
+                $c->query('Config')
             );
         });
     }
