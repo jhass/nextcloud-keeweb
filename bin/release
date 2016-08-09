@@ -1,0 +1,50 @@
+#!/bin/bash
+
+set -e
+
+if [ "$#" -ne 2 ]; then
+  echo "Usage: bin/release version keeweb-version"
+  exit 1
+fi
+
+version="$1"
+keeweb_version="$2"
+
+cd "$(dirname "$(realpath "$0")")/.."
+
+if ! grep "nextcloud-keeweb ($version)" keeweb/CHANGELOG.md >/dev/null; then
+  echo "No entries for $version in changelog, aborting."
+  exit 1
+fi
+
+bin/build "$keeweb_version"
+
+sed -i "s|tar xvf keeweb-.\+\.tar\.gz|tar xvf keeweb-$version.tar.gz|" README.md
+sed -i "s|<version>.\+</version>|<version>$version</version>|" keeweb/appinfo/info.xml
+
+git commit -m "Release $version" README.md keeweb/CHANGELOG.md keeweb/appinfo/info.xml || true
+git tag "v$version"
+git push origin master "+v$version"
+
+pushd keeweb
+make appstore
+popd
+
+changelog="$(ruby << EOF
+puts File.readlines('keeweb/CHANGELOG.md')
+         .drop_while {|line| line.strip != 'nextcloud-keeweb ($version)' }
+         .drop(1)
+         .take_while {|line| line.start_with?('* ') }
+EOF
+)"
+
+message="v$version
+$changelog
+"
+
+hub release create -m "$message" -a "keeweb/build/artifacts/appstore/keeweb.tar.gz#keeweb-$version.tar.gz" "v$version"
+
+checksum=$(sha256sum keeweb/build/artifacts/appstore/keeweb.tar.gz | cut -d ' ' -f1)
+download="$(hub release show --show-downloads v$version | grep "releases/download")"
+
+bin/ncdev appstore release --checksum "$checksum" "$download"
