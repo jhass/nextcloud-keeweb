@@ -30,6 +30,9 @@ pushd keeweb
 make appstore
 popd
 
+tarball="keeweb/build/artifacts/appstore/keeweb-$version.tar.gz"
+mv keeweb/build/artifacts/appstore/keeweb.tar.gz "$tarball"
+
 changelog="$(ruby << EOF
 puts File.readlines('keeweb/CHANGELOG.md')
          .drop_while {|line| line.strip != 'nextcloud-keeweb ($version)' }
@@ -38,13 +41,16 @@ puts File.readlines('keeweb/CHANGELOG.md')
 EOF
 )"
 
-message="v$version
+cat > /tmp/release_notes << EOF
+v$version
+
 $changelog
-"
+EOF
 
-hub release create -m "$message" -a "keeweb/build/artifacts/appstore/keeweb.tar.gz#keeweb-$version.tar.gz" "v$version"
+hub release create -F /tmp/release_notes -a "$tarball" "v$version"
+rm /tmp/release_notes
 
-checksum=$(sha256sum keeweb/build/artifacts/appstore/keeweb.tar.gz | cut -d ' ' -f1)
+checksum=$(sha256sum $tarball | cut -d ' ' -f1)
 download="$(hub release show --show-downloads v$version | grep "releases/download")"
 
 bin/ncdev appstore release --checksum "$checksum" "$download"

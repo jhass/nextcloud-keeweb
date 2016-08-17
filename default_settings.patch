@@ -3,7 +3,7 @@ index b82bd7c..5cfb6f6 100644
 --- a/app/scripts/models/app-settings-model.js
 +++ b/app/scripts/models/app-settings-model.js
 @@ -5,7 +5,7 @@ var Backbone = require('backbone'),
- 
+
  var AppSettingsModel = Backbone.Model.extend({
      defaults: {
 -        theme: 'fb',
@@ -11,7 +11,7 @@ index b82bd7c..5cfb6f6 100644
          expandGroups: true,
          listViewWidth: null,
          menuViewWidth: null,
-@@ -24,13 +24,13 @@ var AppSettingsModel = Backbone.Model.extend({
+@@ -24,14 +24,14 @@ var AppSettingsModel = Backbone.Model.extend({
          skipOpenLocalWarn: false,
          hideEmptyFields: false,
          skipHttpsWarning: false,
@@ -19,6 +19,7 @@ index b82bd7c..5cfb6f6 100644
 +        demoOpened: true,
          fontSize: 0,
          tableViewColumns: null,
+         generatorPresets: null,
 -        dropbox: true,
 +        dropbox: false,
          webdav: true,
@@ -27,5 +28,5 @@ index b82bd7c..5cfb6f6 100644
 +        gdrive: false,
 +        onedrive: false
      },
- 
+
      initialize: function() {
