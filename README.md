@@ -3,7 +3,7 @@
 [Nextcloud](https://nextcloud.com/) is an open source, self-hosted file sync and share and communication app platform.
 [Keeweb](https://keeweb.info/) is a web application for working with databases of the Keepass password manager.
 
-This integrates the two with each other.
+This integrates the two with each other. Just click on a *.kdbx file in Your Nextcloud to open it.
 
 ![demo](https://cloud.aeshna.de/u/mrzyx/keeweb.gif)
 
