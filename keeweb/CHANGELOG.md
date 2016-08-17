@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.2.5)
+* Load standard mimetypes before registering our own.
+
 nextcloud-keeweb (0.2.4)
 * Fix path generation for remote file path when installed to subdirectory.
 * Use current server host in pretty filename
