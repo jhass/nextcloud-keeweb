@@ -2,7 +2,7 @@
 <info>
     <id>keeweb</id>
     <name>Keeweb</name>
-    <description>Open Keepass stores inside Nextcloud with Keeweb.</description>
+    <description>Open Keepass stores inside Nextcloud with Keeweb just by clicking on an *.kdbx file in Your Nextcloud.</description>
     <licence>AGPL</licence>
     <author mail="me@jhass.eu">Jonne Haß</author>
     <version>0.2.4</version>
