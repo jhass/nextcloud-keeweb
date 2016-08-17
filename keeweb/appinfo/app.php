@@ -62,6 +62,7 @@ $mimeTypeDetector = \OC::$server->getMimeTypeDetector();
 $mimeTypeLoader = \OC::$server->getMimeTypeLoader();
 
 // Register custom mimetype we can hook in the frontend
+$mimeTypeDetector->getAllMappings();
 $mimeTypeDetector->registerType('kdbx', 'x-application/kdbx', 'x-application/kdbx');
 
 // And update the filecache for it. TODO: do this on enable only
