@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.2.7)
+* Bundle Keeweb 1.3.1
+
 nextcloud-keeweb (0.2.6)
 * Support Nextcloud 10
 * Bundle Keeweb 1.3.0
