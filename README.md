@@ -29,7 +29,7 @@ git clone https://github.com/nextcloud/ncdev.git
 
 # Install grunt, npm, bower
 
-bin/build keeweb_version # Requires 1.3 or later
+bin/build keeweb_version # Ex. "bin/build refs/heads/master". Requires 1.3 or later
 bin/server
 ```
 
