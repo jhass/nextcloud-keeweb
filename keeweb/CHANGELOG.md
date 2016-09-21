@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.2.8)
+* Bundle Keeweb 1.3.3
+
 nextcloud-keeweb (0.2.7)
 * Bundle Keeweb 1.3.1
 
