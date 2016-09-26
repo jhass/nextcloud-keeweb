@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.2.9)
+* Validate info.xml against XSD
+
 nextcloud-keeweb (0.2.8)
 * Bundle Keeweb 1.3.3
 
