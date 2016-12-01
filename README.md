@@ -19,7 +19,7 @@ To update to a new version, simply repeat these steps.
 
 ```
 git clone https://github.com/jhass/nextcloud-keeweb.git
-cd nextcloud-keewb
+cd nextcloud-keeweb
 
 git clone -b stable10 https://github.com/nextcloud/server.git nextcloud
 ln -sf "$(pwd)/keeweb" nextcloud/apps
