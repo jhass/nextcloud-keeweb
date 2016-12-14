@@ -74,7 +74,7 @@ $mimeTypeLoader->updateFilecache('%.kdbx', $mimetypeId);
 // Remove custom mime-type from filecache as app is disabled
 class Hooks {
 	static public function pre_disable($params) {
-		if ($params['app'] == "keeweb") {
+		if ($params['app'] === "keeweb") {
 			$mimeTypeLoader = \OC::$server->getMimeTypeLoader();
 			$mimetypeId = $mimeTypeLoader->getId('application/octet-stream');
 			$mimeTypeLoader->updateFilecache('%.kdbx', $mimetypeId);
@@ -82,7 +82,7 @@ class Hooks {
 	}
 }
 
-\OC_Hook::connect('OC_App', 'pre_disable', '\OCA\Keeweb\AppInfo\Hooks', 'pre_disable');
+Util::connectHook('OC_App', 'pre_disable', '\OCA\Keeweb\AppInfo\Hooks', 'pre_disable');
 
 // Script for registering file actions
 $eventDispatcher = \OC::$server->getEventDispatcher();
