@@ -65,25 +65,6 @@ $mimeTypeLoader = \OC::$server->getMimeTypeLoader();
 $mimeTypeDetector->getAllMappings();
 $mimeTypeDetector->registerType('kdbx', 'x-application/kdbx', 'x-application/kdbx');
 
-// And update the filecache for it. TODO: do this on enable only
-// Registering a post_enable hook below does not work because
-// this file is run only after (on the next request)
-$mimetypeId = $mimeTypeLoader->getId('x-application/kdbx');
-$mimeTypeLoader->updateFilecache('%.kdbx', $mimetypeId);
-
-// Remove custom mime-type from filecache as app is disabled
-class Hooks {
-	static public function pre_disable($params) {
-		if ($params['app'] == "keeweb") {
-			$mimeTypeLoader = \OC::$server->getMimeTypeLoader();
-			$mimetypeId = $mimeTypeLoader->getId('application/octet-stream');
-			$mimeTypeLoader->updateFilecache('%.kdbx', $mimetypeId);
-		}
-	}
-}
-
-\OC_Hook::connect('OC_App', 'pre_disable', '\OCA\Keeweb\AppInfo\Hooks', 'pre_disable');
-
 // Script for registering file actions
 $eventDispatcher = \OC::$server->getEventDispatcher();
 $eventDispatcher->addListener(

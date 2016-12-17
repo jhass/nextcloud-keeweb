@@ -86,7 +86,7 @@ class PageController extends Controller {
 			'files' => [
 				[
 					'storage' => 'webdav',
-					'name' => $file.' on '.\OCP\Util::getServerHost(),
+					'name' => $file.' on '.$this->request->getServerHost(),
 					'path' => $this->joinPaths($webdavBase, $file.'?requesttoken='.urlencode($csrfToken)),
 					"options" => ['user' => null, 'password' => null]
 				]

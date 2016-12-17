@@ -1,3 +1,8 @@
+nextcloud-keeweb (0.3.0)
+* Nextcloud 11 support
+* Drop Nextcloud 10, and Owncloud/Nextcloud 9 support
+* Use repair steps to update filecache
+
 nextcloud-keeweb (0.2.9)
 * Validate info.xml against XSD
 

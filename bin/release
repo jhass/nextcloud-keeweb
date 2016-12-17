@@ -52,5 +52,6 @@ rm /tmp/release_notes
 
 checksum=$(sha256sum $tarball | cut -d ' ' -f1)
 download="$(hub release show --show-downloads v$version | grep "releases/download")"
+signature=$(openssl dgst -sha512 -sign ~/.nextcloud/certificates/keeweb.key "$tarball" | openssl base64)
 
-bin/ncdev appstore release --checksum "$checksum" "$download"
+curl -X POST -H "Authorization: Token $NC_AUTH_TOKEN" https://apps.nextcloud.com/api/v1/apps/releases -H "Content-Type: application/json" -d '{"download":"$download", "signature": "$signature"}'
