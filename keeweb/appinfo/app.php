@@ -58,12 +58,11 @@ $container->query('OCP\INavigationManager')->add(function () use ($container) {
 	];
 });
 
-$mimeTypeDetector = \OC::$server->getMimeTypeDetector();
 $mimeTypeLoader = \OC::$server->getMimeTypeLoader();
 
-// Register custom mimetype we can hook in the frontend
-$mimeTypeDetector->getAllMappings();
-$mimeTypeDetector->registerType('kdbx', 'x-application/kdbx', 'x-application/kdbx');
+// Changes the mimetype of kdbx files in filecache to correct one
+$mimetypeId = $mimeTypeLoader->getId('x-application/kdbx');
+$mimeTypeLoader->updateFilecache('%.kdbx', $mimetypeId);
 
 // Script for registering file actions
 $eventDispatcher = \OC::$server->getEventDispatcher();
