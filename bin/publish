@@ -4,6 +4,7 @@ require "json"
 require "open-uri"
 require "openssl"
 require "net/http"
+require "base64"
 
 KEYFILE = "#{ENV["HOME"]}/.nextcloud/certificates/keeweb.key"
 
@@ -19,10 +20,10 @@ abort "#{tarball} does not exist" unless File.exist? tarball
 download = JSON.parse(open("https://api.github.com/repos/jhass/nextcloud-keeweb/releases/tags/#{version}", &:read))["assets"].first["browser_download_url"]
 
 digest = OpenSSL::Digest.new("sha512")
-digest.file tarball
-signature = digest.base64digest
+key = OpenSSL::PKey::RSA.new File.read(KEYFILE)
+signature = Base64.encode64 key.sign digest, File.read(tarball)
 
 json = {"download" => download, "signature" => signature}.to_json
 
-Net::HTTP.post(URI("https://apps.nextcloud.com/api/v1/apps/releases"), json,
-  {"Content-Type" => "application/json", "Authorization" => "Token #{ENV["NC_AUTH_TOKEN"]}"})
+puts Net::HTTP.post(URI("https://apps.nextcloud.com/api/v1/apps/releases"), json,
+  {"Content-Type" => "application/json", "Authorization" => "Token #{ENV["NC_AUTH_TOKEN"]}"}).body
