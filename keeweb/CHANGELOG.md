@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.3.1)
+* Bundle Keeweb 1.4.1
+
 nextcloud-keeweb (0.3.0)
 * Nextcloud 11 support
 * Drop Nextcloud 10, and Owncloud/Nextcloud 9 support
