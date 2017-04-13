@@ -1,17 +1,17 @@
 diff --git a/app/scripts/models/app-settings-model.js b/app/scripts/models/app-settings-model.js
-index 51fe48c..4ece016 100644
+index 2c04e6c..74be3ca 100644
 --- a/app/scripts/models/app-settings-model.js
 +++ b/app/scripts/models/app-settings-model.js
-@@ -5,7 +5,7 @@ var Backbone = require('backbone'),
-
- var AppSettingsModel = Backbone.Model.extend({
+@@ -5,7 +5,7 @@ const SettingsStore = require('../comp/settings-store');
+ 
+ const AppSettingsModel = Backbone.Model.extend({
      defaults: {
 -        theme: 'fb',
 +        theme: 'wh',
          locale: null,
          expandGroups: true,
          listViewWidth: null,
-@@ -25,7 +25,7 @@ var AppSettingsModel = Backbone.Model.extend({
+@@ -25,7 +25,7 @@ const AppSettingsModel = Backbone.Model.extend({
          skipOpenLocalWarn: false,
          hideEmptyFields: false,
          skipHttpsWarning: false,
@@ -20,10 +20,10 @@ index 51fe48c..4ece016 100644
          fontSize: 0,
          tableViewColumns: null,
          generatorPresets: null,
-@@ -34,10 +34,10 @@ var AppSettingsModel = Backbone.Model.extend({
-         canOpenSettings: true,
+@@ -35,10 +35,10 @@ const AppSettingsModel = Backbone.Model.extend({
          canCreate: true,
          canImportXml: true,
+         canRemoveLatest: true,
 -        dropbox: true,
 +        dropbox: false,
          webdav: true,
@@ -32,5 +32,5 @@ index 51fe48c..4ece016 100644
 +        gdrive: false,
 +        onedrive: false
      },
-
+ 
      initialize: function() {

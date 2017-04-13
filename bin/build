@@ -23,7 +23,6 @@ npm install --save-dev node-sass@3.13.1
 npm install --no-shrinkwrap
 bower install
 
-git apply < ../disable_electron.patch
 git apply < ../default_settings.patch
 
 grunt

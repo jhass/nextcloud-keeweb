@@ -1,0 +1,28 @@
+#!/usr/bin/ruby
+
+require "json"
+require "open-uri"
+require "openssl"
+require "net/http"
+
+KEYFILE = "#{ENV["HOME"]}/.nextcloud/certificates/keeweb.key"
+
+abort "Usage: bin/publish version tarball" if ARGV.size != 2
+abort "Please set NC_AUTH_TOKEN" unless ENV["NC_AUTH_TOKEN"]
+abort "#{KEYFILE} does not exist" unless File.exist? KEYFILE
+
+version = ARGV[0]
+tarball = ARGV[1]
+
+abort "#{tarball} does not exist" unless File.exist? tarball
+
+download = JSON.parse(open("https://api.github.com/repos/jhass/nextcloud-keeweb/releases/tags/#{version}", &:read))["assets"].first["browser_download_url"]
+
+digest = OpenSSL::Digest.new("sha512")
+digest.file tarball
+signature = digest.base64digest
+
+json = {"download" => download, "signature" => signature}.to_json
+
+Net::HTTP.post(URI("https://apps.nextcloud.com/api/v1/apps/releases"), json,
+  {"Content-Type" => "application/json", "Authorization" => "Token #{ENV["NC_AUTH_TOKEN"]}"})
