@@ -1,3 +1,4 @@
 #!/bin/sh
 cd "$(dirname "$(realpath "$0")")/../nextcloud"
+composer install
 php -S 0.0.0.0:8090
