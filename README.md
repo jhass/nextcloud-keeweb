@@ -21,15 +21,25 @@ To update to a new version, simply repeat these steps.
 git clone https://github.com/jhass/nextcloud-keeweb.git
 cd nextcloud-keeweb
 
+# You can skip this if you only want to build the appstore or source packages
 git clone -b stable12 https://github.com/nextcloud/server.git nextcloud
 ln -sf "$(pwd)/keeweb" nextcloud/apps
 
 git clone https://github.com/keeweb/keeweb.git keeweb-source
 
-# Install grunt, npm, bower
+# Install npm -- this might require a more recent npm than your distro's, see https://github.com/nodesource/distributions on how to deploy it
+# Once npm is installed, install grunt and bower; instead of relying on your distro's, you can do
+sudo npm install -g grunt bower
 
-bin/build keeweb_version # Requires 1.4 or later
+# Build nextcloud-keeweb
+bin/build keeweb_branch # Requires 1.4 or later; use "bin/build develop" for the keeweb development branch
+
+# Finally, run the nextcloud server
 bin/server
+# Alternatively, you can build the app package to test on a running nextcloud by doing
+cd keeweb
+make dist
+# The package that can be installed in the nextcloud app folder is here: ./build/artifacts/appstore/keeweb.tar.gz
 ```
 
 ## Contributing
