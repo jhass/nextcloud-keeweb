@@ -29,8 +29,7 @@ lines.
 
     "kdbx": ["x-application/kdbx"],
 
-If all other mimetypes are not working properly, just run the
-following command:
+After that, run the following command:
 
     sudo -u www-data php occ files:scan --all
 
