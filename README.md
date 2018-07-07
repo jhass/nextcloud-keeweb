@@ -15,6 +15,25 @@ This integrates the two with each other. Just click on a \*.kdbx file in Your Ne
 
 To update to a new version, simply repeat these steps.
 
+## Mimetype detection
+
+Unfortunately, apps can't declare new mimetypes on the fly. To make
+Keeweb work properly, you need to add a new mimetype in the
+`mimetypemapping.json` file (at Nextcloud level).
+
+To proceed, just copy `/resources/config/mimetypemapping.dist.json` to
+`/config/mimetypemapping.json` (in the `config/` folder at Nextcloud’s
+root directory; the file should be stored next to the `config.php`
+file). Afterwards add the two following line just after the “_comment”
+lines.
+
+    "kdbx": ["x-application/kdbx"],
+
+If all other mimetypes are not working properly, just run the
+following command:
+
+    sudo -u www-data php occ files:scan --all
+
 ## Development setup
 
 ```
