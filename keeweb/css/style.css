@@ -1,5 +1,6 @@
 #app {
   overflow-y: hidden;
+  width: 100%;
 }
 
 #app > iframe {
