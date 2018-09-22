@@ -14,7 +14,7 @@
     <repository>https://github.com/jhass/nextcloud-keeweb</repository>
     <screenshot>https://cloud.aeshna.de/u/mrzyx/keeweb.gif</screenshot>
     <dependencies>
-        <nextcloud min-version="11" max-version="12" />
+        <nextcloud min-version="11" max-version="13" />
     </dependencies>
     <repair-steps>
         <install>
