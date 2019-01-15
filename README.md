@@ -19,7 +19,8 @@ To update to a new version, simply repeat these steps.
 
 Unfortunately, apps can't declare new mimetypes on the fly. To make
 Keeweb work properly, you need to add a new mimetype in the
-`mimetypemapping.json` file (at Nextcloud level).
+`mimetypemapping.json` file (also see the Nextcloud manual at
+https://docs.nextcloud.com/server/14/admin_manual/configuration_mimetypes/index.html).
 
 To proceed, just copy `/resources/config/mimetypemapping.dist.json` to
 `/config/mimetypemapping.json` (in the `config/` folder at Nextcloud’s
