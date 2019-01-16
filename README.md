@@ -31,7 +31,8 @@ lines:
     "kdbx": ["x-application/kdbx"]
     }
 
-After that, run the following command:
+After that, run the following command in the root directory of Nextcloud on the server
+(if needed, replace `www-data` with the actual user which is used by the webserver):
 
     sudo -u www-data php occ files:scan --all
 
