@@ -22,13 +22,14 @@ Keeweb work properly, you need to add a new mimetype in the
 `mimetypemapping.json` file (also see the Nextcloud manual at
 https://docs.nextcloud.com/server/14/admin_manual/configuration_mimetypes/index.html).
 
-To proceed, just copy `/resources/config/mimetypemapping.dist.json` to
-`/config/mimetypemapping.json` (in the `config/` folder at Nextcloud’s
-root directory; the file should be stored next to the `config.php`
-file). Afterwards add the two following line just after the “_comment”
-lines.
+To proceed, create the file `/config/mimetypemapping.json` (in the `config/` folder at
+Nextcloud’s root directory; the file should be stored next to the `config.php`
+file) or modify the existing one. Make sure, it contains at least the following
+lines:
 
-    "kdbx": ["x-application/kdbx"],
+    {
+    "kdbx": ["x-application/kdbx"]
+    }
 
 After that, run the following command:
 
