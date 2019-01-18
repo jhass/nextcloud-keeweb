@@ -17,6 +17,7 @@ use \OCP\IConfig;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
+use OCP\AppFramework\Http\EmptyContentSecurityPolicy;
 use OCP\AppFramework\Controller;
 
 class PageController extends Controller {
@@ -41,10 +42,7 @@ class PageController extends Controller {
 		}
 		$response = new TemplateResponse("keeweb", "main", $params);
 		// Override default CSP
-		$csp = new ContentSecurityPolicy();
-		$csp->addAllowedFrameDomain("'self'");
-		$csp->addAllowedChildSrcDomain("'self'");
-		$response->setContentSecurityPolicy($csp);
+		$response->setContentSecurityPolicy($this->getCSP());
 		return $response;
 	}
 
@@ -55,10 +53,7 @@ class PageController extends Controller {
 	public function keeweb() {
 		$response = new TemplateResponse("keeweb", "keeweb", [], "blank");
 		// Override default CSP
-		$csp = new ContentSecurityPolicy();
-		$csp->allowInlineScript(true);
-		$csp->addAllowedFontDomain("data:");
-		$response->setContentSecurityPolicy($csp);
+		$response->setContentSecurityPolicy($this->getCSP());
 		return $response;
 	}
 
@@ -98,5 +93,25 @@ class PageController extends Controller {
 
 	private function joinPaths($base, $path) {
 		return rtrim($base, '/').'/'.ltrim($path, '/');
+	}
+
+	private function getCSP() {
+		$csp = new EmptyContentSecurityPolicy();
+		$csp->addAllowedFrameDomain("'self'");
+		$csp->addAllowedFrameDomain("'unsafe-inline'");
+		$csp->addAllowedFrameDomain("'unsafe-eval'");
+		$csp->addAllowedStyleDomain("'self'");
+		$csp->addAllowedFontDomain("'self'");
+		$csp->addAllowedFontDomain("data:");
+		$csp->addAllowedImageDomain("'self'");
+		$csp->addAllowedImageDomain("data:");
+		$csp->addAllowedImageDomain("blob:");
+		$csp->addAllowedScriptDomain("'self'");
+		$csp->addAllowedConnectDomain("'self'");
+		$csp->addAllowedChildSrcDomain("blob:");
+		$csp->allowEvalScript(true);
+		$csp->allowInlineScript(true);
+		$csp->allowInlineStyle(true);
+		return $csp;
 	}
 }
