@@ -1,3 +1,9 @@
+nextcloud-keeweb (0.5.0)
+* Support Nextcloud 15
+* Bundle Keeweb 1.7.4
+* Hopefully fix CSP issues
+* Pay attention to readme for a guide on how to make this work properly!
+
 nextcloud-keeweb (0.4.0)
 * Support Nextcloud 12
 * Bundle Keeweb 1.5.0

@@ -45,14 +45,15 @@ git clone https://github.com/jhass/nextcloud-keeweb.git
 cd nextcloud-keeweb
 
 # You can skip this if you only want to build the appstore or source packages
-git clone -b stable12 https://github.com/nextcloud/server.git nextcloud
+git clone -b stable15 https://github.com/nextcloud/server.git nextcloud
 ln -sf "$(pwd)/keeweb" nextcloud/apps
+cd nextcloud && git submodule update --init && cd -
 
 git clone https://github.com/keeweb/keeweb.git keeweb-source
 
 # Install npm -- this might require a more recent npm than your distro's, see https://github.com/nodesource/distributions on how to deploy it
 # Once npm is installed, install grunt and bower; instead of relying on your distro's, you can do
-sudo npm install -g grunt bower
+sudo npm install -g grunt
 
 # Build nextcloud-keeweb
 bin/build keeweb_branch # Requires 1.4 or later; use "bin/build develop" for the keeweb development branch
