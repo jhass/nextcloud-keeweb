@@ -63,7 +63,7 @@ $mimeTypeLoader = \OC::$server->getMimeTypeLoader();
 
 // Register custom mimetype we can hook in the frontend
 $mimeTypeDetector->getAllMappings();
-$mimeTypeDetector->registerType('kdbx', 'x-application/kdbx', 'x-application/kdbx');
+$mimeTypeDetector->registerType('kdbx', 'application/x-kdbx', 'application/x-kdbx');
 
 // Script for registering file actions
 $eventDispatcher = \OC::$server->getEventDispatcher();

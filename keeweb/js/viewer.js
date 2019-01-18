@@ -16,12 +16,12 @@
       && typeof OCA.Files !== 'undefined'
       && typeof OCA.Files.fileActions !== 'undefined'
     ) {
-      OCA.Files.fileActions.register(
-        'x-application/kdbx',
-        'Open',
-        OC.PERMISSION_UPDATE,
-        OC.imagePath('core', 'actions/edit'),
-        function (fileName, context) {
+      OCA.Files.fileActions.registerAction({
+        name: 'Open',
+        mime: 'application/x-kdbx',
+        permissions: OC.PERMISSION_UPDATE,
+        icon: OC.imagePath('core', 'actions/edit'),
+        actionHandler: function (fileName, context) {
           OC.redirect(
             OC.generateUrl(
               'apps/keeweb/?open={file}',
@@ -29,10 +29,10 @@
             )
           );
         },
-        t('keeweb', 'Open')
-      );
+        displayName: t('keeweb', 'Open')
+      });
 
-      OCA.Files.fileActions.setDefault('x-application/kdbx', 'Open');
+      OCA.Files.fileActions.setDefault('application/x-kdbx', 'Open');
     }
   });
 })(jQuery, OC);

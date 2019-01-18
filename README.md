@@ -27,9 +27,11 @@ Nextcloud’s root directory; the file should be stored next to the `config.php`
 file) or modify the existing one. Make sure, it contains at least the following
 lines:
 
-    {
-    "kdbx": ["x-application/kdbx"]
-    }
+```
+{
+  "kdbx": ["application/x-kdbx"]
+}
+```
 
 After that, run the following command in the root directory of Nextcloud on the server
 (if needed, replace `www-data` with the actual user which is used by the webserver):
