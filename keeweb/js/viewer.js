@@ -32,7 +32,7 @@
         t('keeweb', 'Open')
       );
 
-      OCA.Files.fileActions.setDefault('x-application/kdbx', 'Open');
+      OCA.Files.fileActions.setDefault('application/x-kdbx', 'Open');
     }
   });
 })(jQuery, OC);
