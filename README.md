@@ -38,6 +38,41 @@ After that, run the following command in the root directory of Nextcloud on the 
 
     sudo -u www-data php occ files:scan --all
 
+#### Example for nextcloud installed on yunohost
+
+If you want to install keeweb app on nextcloud installed on a yunohost server, you should do :
+
+```
+cd /var/www/nextcloud/apps
+sudo wget https://github.com/jhass/nextcloud-keeweb/releases/download/v0.5.0/keeweb-0.5.0.tar.gz
+sudo tar xvf keeweb-0.5.0.tar.gz
+sudo rm keeweb-0.5.0.tar.gz
+sudo chown nextcloud:nextcloud -R keeweb
+```
+
+Then go into nextcloud and activate the app keeweb
+
+Than back to terminal :
+`sudo nano /var/www/nextcloud/config/mimetypemapping.json`
+add
+
+```
+{
+  "kdbx": ["application/x-kdbx"]
+}
+```
+
+CTL+x , then yes, then enter.
+
+and finally,
+
+```
+sudo chown nextcloud:nextcloud /var/www/nextcloud/config/mimetypemapping.json
+sudo -u nextcloud php /var/www/nextcloud/occ files:scan --all
+```
+
+Enjoy keeweb!
+
 ## Development setup
 
 ```
