@@ -50,9 +50,9 @@ sudo rm keeweb-0.5.0.tar.gz
 sudo chown nextcloud:nextcloud -R keeweb
 ```
 
-Then go into nextcloud and activate the app keeweb
+Then go into nextcloud and activate the app keeweb :  Go to "Apps" and then "Not enabled", scroll down to "Experimental" and enable it.
 
-Than back to terminal :
+Then back to terminal :
 `sudo nano /var/www/nextcloud/config/mimetypemapping.json`
 add
 
