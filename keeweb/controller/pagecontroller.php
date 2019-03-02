@@ -108,6 +108,8 @@ class PageController extends Controller {
 		$csp->addAllowedImageDomain("blob:");
 		$csp->addAllowedScriptDomain("'self'");
 		$csp->addAllowedConnectDomain("'self'");
+		$csp->addAllowedScriptDomain('https://plugins.keeweb.info');
+		$csp->addAllowedConnectDomain('https://plugins.keeweb.info');
 		$csp->addAllowedChildSrcDomain("blob:");
 		$csp->allowEvalScript(true);
 		$csp->allowInlineScript(true);
