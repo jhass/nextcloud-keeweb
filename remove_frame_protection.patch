@@ -4,10 +4,10 @@ index acba8fb7..1342b4cf 100644
 +++ b/app/scripts/app.js
 @@ -27,7 +27,7 @@ const Locale = require('./util/locale');
  const ready = Launcher && Launcher.ready || $;
- 
+
  ready(() => {
--    if (FeatureDetector.isPopup && AuthReceiver.receive() || FeatureDetector.isFrame) {
-+    if (FeatureDetector.isPopup && AuthReceiver.receive()) {
+-    if (AuthReceiver.receive() || FeatureDetector.isFrame) {
++    if (AuthReceiver.receive()) {
          return;
      }
      loadMixins();
