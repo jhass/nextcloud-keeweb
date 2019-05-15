@@ -1,3 +1,8 @@
+nextcloud-keeweb (0.5.1)
+* Support Nextcloud 16
+* Bundle Keeweb 1.8.2
+* Fix CSP error when loading Keeweb plugins
+
 nextcloud-keeweb (0.5.0)
 * Support Nextcloud 15
 * Bundle Keeweb 1.7.7
