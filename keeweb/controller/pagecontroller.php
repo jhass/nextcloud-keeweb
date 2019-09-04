@@ -100,6 +100,7 @@ class PageController extends Controller {
 		$csp->addAllowedFrameDomain("'self'");
 		$csp->addAllowedFrameDomain("'unsafe-inline'");
 		$csp->addAllowedFrameDomain("'unsafe-eval'");
+		$csp->addAllowedFrameDomain("blob:");
 		$csp->addAllowedStyleDomain("'self'");
 		$csp->addAllowedFontDomain("'self'");
 		$csp->addAllowedFontDomain("data:");
