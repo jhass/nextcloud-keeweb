@@ -17,7 +17,7 @@ Please read https://github.com/jhass/nextcloud-keeweb/blob/master/README.md#mime
     <repository>https://github.com/jhass/nextcloud-keeweb</repository>
     <screenshot>https://cloud.aeshna.de/keeweb.gif</screenshot>
     <dependencies>
-        <nextcloud min-version="11" max-version="16" />
+        <nextcloud min-version="11" max-version="17" />
     </dependencies>
     <repair-steps>
         <install>
