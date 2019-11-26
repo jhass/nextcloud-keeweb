@@ -39,6 +39,8 @@ class PageController extends Controller {
 		$params = ['keeweb' => $this->urlGenerator->linkToRoute('keeweb.page.keeweb')];
 		if (isset($open)) {
 			$params['config'] = 'config?file='.$open;
+		} else {
+			$params['config'] = 'config';
 		}
 		$response = new TemplateResponse("keeweb", "main", $params);
 		// Override default CSP
