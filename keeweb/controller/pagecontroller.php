@@ -13,6 +13,7 @@ namespace OCA\Keeweb\Controller;
 
 use OCP\IRequest;
 use OCP\IURLGenerator;
+use OCP\L10N\IFactory;
 use \OCP\IConfig;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\JSONResponse;
@@ -24,11 +25,13 @@ class PageController extends Controller {
 
 	private $urlGenerator;
 	private $settings;
+	private $l10nFactory;	
 
-	public function __construct($AppName, IRequest $request, IURLGenerator $urlGenerator, IConfig $settings) {
+	public function __construct($AppName, IRequest $request, IURLGenerator $urlGenerator, IConfig $settings, IFactory $l10nFactory) {
 		parent::__construct($AppName, $request);
 		$this->urlGenerator = $urlGenerator;
 		$this->settings = $settings;
+		$this->l10nFactory = $l10nFactory;		
 	}
 
 	/**
@@ -39,6 +42,8 @@ class PageController extends Controller {
 		$params = ['keeweb' => $this->urlGenerator->linkToRoute('keeweb.page.keeweb')];
 		if (isset($open)) {
 			$params['config'] = 'config?file='.$open;
+		} else {
+			$params['config'] = 'config';
 		}
 		$response = new TemplateResponse("keeweb", "main", $params);
 		// Override default CSP
@@ -77,7 +82,7 @@ class PageController extends Controller {
 		$csrfToken = \OC::$server->getCSRFTokenManager()->getToken()->getEncryptedValue();
 		$webdavBase = \OCP\Util::linkToRemote('webdav');
 		$config = [
-			'settings' => (object) null,
+			'settings' => [ 'locale' => str_replace('_', '-', $this->l10nFactory->findLocale()) ],
 			'files' => [
 				[
 					'storage' => 'webdav',
