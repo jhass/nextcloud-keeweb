@@ -81,18 +81,17 @@ class PageController extends Controller {
 	public function config($file) {
 		$csrfToken = \OC::$server->getCSRFTokenManager()->getToken()->getEncryptedValue();
 		$webdavBase = \OCP\Util::linkToRemote('webdav');
-		$config = [
-			'settings' => [ 'locale' => str_replace('_', '-', $this->l10nFactory->findLocale()) ],
-			'files' => [
+		$config = ['settings' => ['locale' =>  str_replace('_', '-', $this->l10nFactory->findLocale())]];
+		if (isset($file)) {
+			$config['files'] = [
 				[
 					'storage' => 'webdav',
 					'name' => $file.' on '.$this->request->getServerHost(),
 					'path' => $this->joinPaths($webdavBase, $file.'?requesttoken='.urlencode($csrfToken)),
 					"options" => ['user' => null, 'password' => null]
 				]
-			]
-		];
-
+			];
+		}
 		return new JSONResponse($config);
 	}
 
