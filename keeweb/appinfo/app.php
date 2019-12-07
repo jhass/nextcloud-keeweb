@@ -59,9 +59,6 @@ $container->query('OCP\INavigationManager')->add(function () use ($container) {
 });
 
 $mimeTypeDetector = \OC::$server->getMimeTypeDetector();
-
-// Register custom mimetype we can hook in the frontend
-$mimeTypeDetector->getAllMappings();
 $mimeTypeDetector->registerType('kdbx', 'application/x-kdbx', 'application/x-kdbx');
 
 // Script for registering file actions
