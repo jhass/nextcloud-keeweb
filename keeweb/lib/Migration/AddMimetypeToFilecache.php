@@ -2,29 +2,26 @@
 
 namespace OCA\Keeweb\Migration;
 
-use OCP\Migration\IRepairStep;
-use OCP\IDBConnection;
+use OCP\Files\IMimeTypeLoader;
 use OCP\Migration\IOutput;
+use OCP\Migration\IRepairStep;
 
 class AddMimetypeToFilecache implements IRepairStep {
-  public function __construct(IDBConnection $connection) {}
 
-  public function getName() {
-    return "Add custom mimetype to filecache";
-  }
+    private $mimeTypeLoader;
 
-  public function run(IOutput $output) {
-    $mimeTypeDetector = \OC::$server->getMimeTypeDetector();
-    $mimeTypeLoader = \OC::$server->getMimeTypeLoader();
+    public function __construct(IMimeTypeLoader $mimeTypeLoader) {
+        $this->mimeTypeLoader = $mimeTypeLoader;
+    }
 
-    // Register custom mimetype
-    $mimeTypeDetector->getAllMappings();
-    $mimeTypeDetector->registerType('kdbx', 'x-application/kdbx', 'x-application/kdbx');
+    public function getName() {
+        return 'Add custom mimetype to filecache';
+    }
 
-    // And update the filecache for it.
-    $mimetypeId = $mimeTypeLoader->getId('x-application/kdbx');
-    $mimeTypeLoader->updateFilecache('%.kdbx', $mimetypeId);
-
-    $output->info("Added custom mimetype to filecache.");
-  }
+    public function run(IOutput $output) {
+        // And update the filecache for it.
+        $mimetypeId = $this->mimeTypeLoader->getId('application/x-kdbx');
+        $this->mimeTypeLoader->updateFilecache('kdbx', $mimetypeId);
+        $output->info('Added custom mimetype to filecache.');
+    }
 }
