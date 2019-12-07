@@ -59,7 +59,6 @@ $container->query('OCP\INavigationManager')->add(function () use ($container) {
 });
 
 $mimeTypeDetector = \OC::$server->getMimeTypeDetector();
-$mimeTypeLoader = \OC::$server->getMimeTypeLoader();
 
 // Register custom mimetype we can hook in the frontend
 $mimeTypeDetector->getAllMappings();
