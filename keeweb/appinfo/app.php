@@ -11,11 +11,16 @@
 
 namespace OCA\Keeweb\AppInfo;
 
+use OC\Files\Type\Detection;
 use OCP\AppFramework\App;
 use OCA\Keeweb\Controller\PageController;
 
 $mimeTypeDetector = \OC::$server->getMimeTypeDetector();
-$mimeTypeDetector->registerType('kdbx', 'application/x-kdbx', 'application/x-kdbx');
+if ($mimeTypeDetector instanceof Detection) {
+    /** registerType without getAllMappings will prevent loading nextcloud's default mappings. */
+    $mimeTypeDetector->getAllMappings();
+    $mimeTypeDetector->registerType('kdbx', 'application/x-kdbx', 'application/x-kdbx');
+}
 
 if (\OC::$REQUESTEDAPP === 'dav') {
     /** For dav requests it should be enough to register the mime type and skip the rest of the app initialization. */
