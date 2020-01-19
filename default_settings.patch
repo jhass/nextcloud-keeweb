@@ -1,17 +1,17 @@
 diff --git a/app/scripts/models/app-settings-model.js b/app/scripts/models/app-settings-model.js
-index 8434b29..35eb6dc 100644
+index eebf08ff..a23e475a 100644
 --- a/app/scripts/models/app-settings-model.js
 +++ b/app/scripts/models/app-settings-model.js
-@@ -3,7 +3,7 @@ const SettingsStore = require('../comp/settings-store');
+@@ -29,7 +29,7 @@ class AppSettingsModel extends Model {
  
- const AppSettingsModel = Backbone.Model.extend({
-     defaults: {
+ AppSettingsModel.defineModelProperties(
+     {
 -        theme: 'fb',
 +        theme: 'wh',
          locale: null,
          expandGroups: true,
          listViewWidth: null,
-@@ -26,23 +26,25 @@ const AppSettingsModel = Backbone.Model.extend({
+@@ -56,28 +56,30 @@ AppSettingsModel.defineModelProperties(
          skipOpenLocalWarn: false,
          hideEmptyFields: false,
          skipHttpsWarning: false,
@@ -20,7 +20,10 @@ index 8434b29..35eb6dc 100644
          fontSize: 0,
          tableViewColumns: null,
          generatorPresets: null,
+         generatorHidePassword: false,
          cacheConfigSettings: false,
+-        allowIframes: false,
++        allowIframes: true,
  
          canOpen: true,
 -        canOpenDemo: true,
@@ -29,7 +32,10 @@ index 8434b29..35eb6dc 100644
 -        canCreate: true,
 +        canCreate: false,
          canImportXml: true,
+         canImportCsv: true,
          canRemoveLatest: true,
+         canExportXml: true,
+         canExportHtml: true,
  
 -        dropbox: true,
 +        dropbox: false,
@@ -41,5 +47,5 @@ index 8434b29..35eb6dc 100644
 +
 +        webdavSaveMethod: 'put'
      },
- 
-     initialize: function() {
+     { extensions: true }
+ );

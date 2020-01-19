@@ -16,15 +16,14 @@ git checkout .
 git checkout "$version"
 git symbolic-ref -q HEAD && git pull || true
 
-sed -i 's|"node-sass":.\+|"node-sass": "4.11.0",|' package.json
-sed -i 's/: "[^@]*@github:/: "github:/' package-lock.json
+git apply < ../mock_codesignconfig.patch
+git apply < ../default_settings.patch
+
 npm uninstall --save-dev electron-prebuilt
 npm uninstall --save-dev electron-builder
 npm uninstall --save-dev grunt-electron
 npm install --no-shrinkwrap --no-package-lock
 
-git apply < ../default_settings.patch
-git apply < ../remove_frame_protection.patch
 
 grunt build-web-app --skip-sign --force
 cp dist/index.html ../keeweb/templates/keeweb.php

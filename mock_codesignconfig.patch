@@ -1,0 +1,13 @@
+diff --git a/Gruntfile.js b/Gruntfile.js
+index 448e6565..410c810c 100644
+--- a/Gruntfile.js
++++ b/Gruntfile.js
+@@ -7,7 +7,7 @@ const debug = require('debug');
+ const webpackConfig = require('./build/webpack.config');
+ const webpackConfigTest = require('./test/test.webpack.config');
+ const pkg = require('./package.json');
+-const codeSignConfig = require('../keys/codesign');
++const codeSignConfig = { identities: {} };
+ 
+ debug.enable('electron-notarize');
+ 
