@@ -39,6 +39,8 @@ class PageController extends Controller {
 		$params = ['keeweb' => $this->urlGenerator->linkToRoute('keeweb.page.keeweb')];
 		if (isset($open)) {
 			$params['config'] = 'config?file='.$open;
+		} else {
+			$params['config'] = 'config';
 		}
 		$response = new TemplateResponse("keeweb", "main", $params);
 		// Override default CSP
@@ -76,18 +78,17 @@ class PageController extends Controller {
 	public function config($file) {
 		$csrfToken = \OC::$server->getCSRFTokenManager()->getToken()->getEncryptedValue();
 		$webdavBase = \OCP\Util::linkToRemote('webdav');
-		$config = [
-			'settings' => (object) null,
-			'files' => [
+		$config = ['settings' => (object) null];
+		if (isset($file)) {
+			$config['files'] = [
 				[
 					'storage' => 'webdav',
 					'name' => $file.' on '.$this->request->getServerHost(),
 					'path' => $this->joinPaths($webdavBase, $file.'?requesttoken='.urlencode($csrfToken)),
 					"options" => ['user' => null, 'password' => null]
 				]
-			]
-		];
-
+			];
+		}	
 		return new JSONResponse($config);
 	}
 
