@@ -10,6 +10,9 @@ Please read https://github.com/jhass/nextcloud-keeweb/blob/master/README.md#mime
     <licence>agpl</licence>
     <author>Jonne Haß</author>
     <namespace>Keeweb</namespace>
+    <types>
+        <filesystem/>
+    </types>
     <category>tools</category>
     <category>integration</category>
     <website>https://github.com/jhass/nextcloud-keeweb</website>

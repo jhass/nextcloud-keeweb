@@ -11,8 +11,21 @@
 
 namespace OCA\Keeweb\AppInfo;
 
+use OC\Files\Type\Detection;
 use OCP\AppFramework\App;
 use OCA\Keeweb\Controller\PageController;
+
+$mimeTypeDetector = \OC::$server->getMimeTypeDetector();
+if ($mimeTypeDetector instanceof Detection) {
+    /** registerType without getAllMappings will prevent loading nextcloud's default mappings. */
+    $mimeTypeDetector->getAllMappings();
+    $mimeTypeDetector->registerType('kdbx', 'application/x-kdbx', 'application/x-kdbx');
+}
+
+if (\OC::$REQUESTEDAPP === 'dav') {
+    /** For dav requests it should be enough to register the mime type and skip the rest of the app initialization. */
+    return;
+}
 
 require_once __DIR__ . '/autoload.php';
 
@@ -57,13 +70,6 @@ $container->query('OCP\INavigationManager')->add(function () use ($container) {
 		'name' => $l10n->t('Keeweb'),
 	];
 });
-
-$mimeTypeDetector = \OC::$server->getMimeTypeDetector();
-$mimeTypeLoader = \OC::$server->getMimeTypeLoader();
-
-// Register custom mimetype we can hook in the frontend
-$mimeTypeDetector->getAllMappings();
-$mimeTypeDetector->registerType('kdbx', 'application/x-kdbx', 'application/x-kdbx');
 
 // Script for registering file actions
 $eventDispatcher = \OC::$server->getEventDispatcher();
