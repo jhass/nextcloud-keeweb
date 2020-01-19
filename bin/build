@@ -27,5 +27,5 @@ npm install --no-shrinkwrap --no-package-lock
 
 grunt build-web-app --skip-sign --force
 cp dist/index.html ../keeweb/templates/keeweb.php
-sed -i 's|<?xml version="1.0"|<?php echo "<?xml version=\\"1.0\\""; ?>|g' ../keeweb/templates/keeweb.php
+sed -i 's|<?|<?php echo "<?"; ?>|g' ../keeweb/templates/keeweb.php
 sed -i 's|><script>|><script nonce="<?php p(\OC::$server->getContentSecurityPolicyNonceManager()->getNonce()); ?>">|g' ../keeweb/templates/keeweb.php
