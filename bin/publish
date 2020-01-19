@@ -17,7 +17,7 @@ tarball = ARGV[1]
 
 abort "#{tarball} does not exist" unless File.exist? tarball
 
-download = JSON.parse(open("https://api.github.com/repos/jhass/nextcloud-keeweb/releases/tags/#{version}", &:read))["assets"].first["browser_download_url"]
+download = JSON.parse(URI.open("https://api.github.com/repos/jhass/nextcloud-keeweb/releases/tags/#{version}", &:read))["assets"].first["browser_download_url"]
 
 digest = OpenSSL::Digest.new("sha512")
 key = OpenSSL::PKey::RSA.new File.read(KEYFILE)
