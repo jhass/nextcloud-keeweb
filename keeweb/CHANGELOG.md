@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.1)
+* Improve PHP short tags workaround
+
 nextcloud-keeweb (0.6.0)
 * Support Nextcloud 17 & 18
 * Bundle Keeweb 1.12.3
