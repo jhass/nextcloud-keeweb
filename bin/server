@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+realpath() {
+ [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
 cd "$(dirname "$(realpath "$0")")/../nextcloud"
 composer install
 php -S 0.0.0.0:8090

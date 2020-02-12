@@ -31,8 +31,8 @@ fi
 
 bin/build "$keeweb_version"
 
-sed -i "s|tar xvf keeweb-.\+\.tar\.gz|tar xvf keeweb-$version.tar.gz|" README.md
-sed -i "s|<version>.\+</version>|<version>$version</version>|" keeweb/appinfo/info.xml
+sed -i -e "s|tar xvf keeweb-.\+\.tar\.gz|tar xvf keeweb-$version.tar.gz|" README.md
+sed -i -e "s|<version>.\+</version>|<version>$version</version>|" keeweb/appinfo/info.xml
 
 git commit -m "Release $version" README.md keeweb/CHANGELOG.md keeweb/appinfo/info.xml || true
 git tag "v$version"

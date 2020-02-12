@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.2)
+* Include service-worker.js
+
 nextcloud-keeweb (0.6.1)
 * Improve PHP short tags workaround
 

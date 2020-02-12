@@ -15,20 +15,29 @@ use OCP\IRequest;
 use OCP\IURLGenerator;
 use \OCP\IConfig;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\AppFramework\Http\DataDisplayResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\AppFramework\Http\EmptyContentSecurityPolicy;
 use OCP\AppFramework\Controller;
+use OCP\App\IAppManager;
 
 class PageController extends Controller {
 
 	private $urlGenerator;
 	private $settings;
+	private $appManager;
 
-	public function __construct($AppName, IRequest $request, IURLGenerator $urlGenerator, IConfig $settings) {
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		IURLGenerator $urlGenerator,
+		IConfig $settings,
+		IAppManager $appManager) {
 		parent::__construct($AppName, $request);
 		$this->urlGenerator = $urlGenerator;
 		$this->settings = $settings;
+		$this->appManager = $appManager;
 	}
 
 	/**
@@ -88,8 +97,21 @@ class PageController extends Controller {
 					"options" => ['user' => null, 'password' => null]
 				]
 			];
-		}	
+		}
 		return new JSONResponse($config);
+	}
+
+
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function serviceworker() {
+		$response = new DataDisplayResponse(file_get_contents(
+                  $this->joinPaths($this->appManager->getAppPath("keeweb"), "templates/service-worker.js")));
+		$response->addHeader("Content-Type", "application/javascript; charset=utf8");
+		$response->setContentSecurityPolicy($this->getCSP());
+		return $response;
 	}
 
 	private function joinPaths($base, $path) {
@@ -114,6 +136,7 @@ class PageController extends Controller {
 		$csp->addAllowedScriptDomain('https://plugins.keeweb.info');
 		$csp->addAllowedConnectDomain('https://plugins.keeweb.info');
 		$csp->addAllowedChildSrcDomain("blob:");
+		$csp->addAllowedChildSrcDomain("'self'");
 		$csp->allowEvalScript(true);
 		$csp->allowInlineScript(true);
 		$csp->allowInlineStyle(true);

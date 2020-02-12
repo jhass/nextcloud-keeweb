@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+realpath() {
+ [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
+
 if [ "$#" -ne 1 ]; then
   echo "Usage: bin/build keeweb-version"
   exit 1
@@ -26,6 +31,7 @@ npm install --no-shrinkwrap --no-package-lock
 
 
 grunt build-web-app --skip-sign --force
-cp dist/index.html ../keeweb/templates/keeweb.php
-sed -i 's|<?|<?php echo "<?"; ?>|g' ../keeweb/templates/keeweb.php
-sed -i 's|><script>|><script nonce="<?php p(\OC::$server->getContentSecurityPolicyNonceManager()->getNonce()); ?>">|g' ../keeweb/templates/keeweb.php
+cp -v dist/index.html ../keeweb/templates/keeweb.php
+cp -v dist/service-worker.js ../keeweb/templates/
+sed -i -e 's|<?|<?php echo "<?"; ?>|g' ../keeweb/templates/keeweb.php
+sed -i -e 's|><script>|><script nonce="<?php p(\OC::$server->getContentSecurityPolicyNonceManager()->getNonce()); ?>">|g' ../keeweb/templates/keeweb.php
