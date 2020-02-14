@@ -44,12 +44,11 @@
       return true;
     });
 
-    fileInfo.path = fileInfo.path.replace(/requesttoken=[^&]+/,"requesttoken=" + encodeURIComponent(OC.requestToken));
-    
+    fileInfos = fileInfos.map(function(fileInfo) {
+      fileInfo.path = fileInfo.path.replace(/requesttoken=[^&]+/,"requesttoken=" + encodeURIComponent(OC.requestToken));
+      return fileInfo;
+    });
+
     localStorage.fileInfo = JSON.stringify(fileInfos);
   }
-
-  $(document).ready(function () {
-
-  });
 })(jQuery, OC);
