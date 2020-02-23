@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>keeweb</id>
     <name>Keeweb</name>
     <summary>Open Keepass stores</summary>
@@ -8,9 +8,6 @@
     <licence>agpl</licence>
     <author>Jonne Haß</author>
     <namespace>Keeweb</namespace>
-    <types>
-        <filesystem/>
-    </types>
     <category>tools</category>
     <category>integration</category>
     <website>https://github.com/jhass/nextcloud-keeweb</website>
@@ -18,14 +15,17 @@
     <repository>https://github.com/jhass/nextcloud-keeweb</repository>
     <screenshot>https://cloud.aeshna.de/keeweb.gif</screenshot>
     <dependencies>
-        <nextcloud min-version="11" max-version="18" />
+        <nextcloud min-version="11" max-version="18"/>
     </dependencies>
     <repair-steps>
         <install>
-            <step>OCA\Keeweb\Migration\AddMimetypeToFilecache</step>
+            <step>OCA\Keeweb\Migration\RegisterMimeType</step>
         </install>
+        <post-migrate>
+            <step>OCA\Keeweb\Migration\RegisterMimeType</step>
+        </post-migrate>
         <uninstall>
-            <step>OCA\Keeweb\Migration\RemoveMimetypeFromFilecache</step>
+            <step>OCA\Keeweb\Migration\UnregisterMimeType</step>
         </uninstall>
     </repair-steps>
 </info>
