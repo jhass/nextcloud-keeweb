@@ -6,29 +6,22 @@ use OCP\Files\IMimeTypeLoader;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
-class UnregisterMimeType implements IRepairStep
+class UnregisterMimeType extends MimeTypeMigration
 {
-    private $mimeTypeLoader;
-
-    public function __construct(IMimeTypeLoader $mimeTypeLoader)
-    {
-        $this->mimeTypeLoader = $mimeTypeLoader;
-    }
-
     public function getName()
     {
         return 'Unregister MIME type for "application/x-kdbx"';
     }
 
-    private function registerForExistingFiles()
+    private function unregisterForExistingFiles()
     {
-        $mimetypeId = $this->mimeTypeLoader->getId('application/octet-stream');
-        $this->mimeTypeLoader->updateFilecache('kdbx', $mimetypeId);
+        $mimeTypeId = $this->mimeTypeLoader->getId('application/octet-stream');
+        $this->mimeTypeLoader->updateFilecache('kdbx', $mimeTypeId);
     }
 
-    private function registerForNewFiles()
+    private function unregisterForNewFiles()
     {
-        $mappingFile = \OC::$configDir . 'mimetypemapping.json';
+        $mappingFile = \OC::$configDir . self::CUSTOM_MIMETYPEMAPPING;
 
         if (file_exists($mappingFile)) {
             $mapping = json_decode(file_get_contents($mappingFile), true);
@@ -43,14 +36,14 @@ class UnregisterMimeType implements IRepairStep
 
     public function run(IOutput $output)
     {
-        $this->logger->info('Unregistering the mimetype...');
+        $output->info('Unregistering the mimetype...');
 
         // Register the mime type for existing files
-        $this->registerForExistingFiles();
+        $this->unregisterForExistingFiles();
 
         // Register the mime type for new files
-        $this->registerForNewFiles();
+        $this->unregisterForNewFiles();
 
-        $this->logger->info('The mimetype was successfully unregistered.');
+        $output->info('The mimetype was successfully unregistered.');
     }
 }

@@ -6,15 +6,8 @@ use OCP\Files\IMimeTypeLoader;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
-class RegisterMimeType implements IRepairStep
+class RegisterMimeType extends MimeTypeMigration
 {
-    private $mimeTypeLoader;
-
-    public function __construct(IMimeTypeLoader $mimeTypeLoader)
-    {
-        $this->mimeTypeLoader = $mimeTypeLoader;
-    }
-
     public function getName()
     {
         return 'Register MIME type for "application/x-kdbx"';
@@ -22,14 +15,14 @@ class RegisterMimeType implements IRepairStep
 
     private function registerForExistingFiles()
     {
-        $mimetypeId = $this->mimeTypeLoader->getId('application/x-kdbx');
-        $this->mimeTypeLoader->updateFilecache('kdbx', $mimetypeId);
+        $mimeTypeId = $this->mimeTypeLoader->getId('application/x-kdbx');
+        $this->mimeTypeLoader->updateFilecache('kdbx', $mimeTypeId);
     }
 
     private function registerForNewFiles()
     {
         $mapping = ['kdbx' => ['application/x-kdbx']];
-        $mappingFile = \OC::$configDir . 'mimetypemapping.json';
+        $mappingFile = \OC::$configDir . self::CUSTOM_MIMETYPEMAPPING;
 
         if (file_exists($mappingFile)) {
             $existingMapping = json_decode(file_get_contents($mappingFile), true);
@@ -43,7 +36,7 @@ class RegisterMimeType implements IRepairStep
 
     public function run(IOutput $output)
     {
-        $this->logger->info('Registering the mimetype...');
+        $output->info('Registering the mimetype...');
 
         // Register the mime type for existing files
         $this->registerForExistingFiles();
@@ -51,6 +44,6 @@ class RegisterMimeType implements IRepairStep
         // Register the mime type for new files
         $this->registerForNewFiles();
 
-        $this->logger->info('The mimetype was successfully registered.');
+        $output->info('The mimetype was successfully registered.');
     }
 }
