@@ -26,7 +26,7 @@ class RegisterMimeType extends MimeTypeMigration
 
         if (file_exists($mappingFile)) {
             $existingMapping = json_decode(file_get_contents($mappingFile), true);
-            if (json_last_error() === JSON_ERROR_NONE) {
+            if (json_last_error() === JSON_ERROR_NONE && is_array($existingMapping)) {
                 $mapping = array_merge($existingMapping, $mapping);
             }
         }

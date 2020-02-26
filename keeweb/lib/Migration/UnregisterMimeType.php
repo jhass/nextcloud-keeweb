@@ -25,7 +25,7 @@ class UnregisterMimeType extends MimeTypeMigration
 
         if (file_exists($mappingFile)) {
             $mapping = json_decode(file_get_contents($mappingFile), true);
-            if (json_last_error() === JSON_ERROR_NONE) {
+            if (json_last_error() === JSON_ERROR_NONE && is_array($mapping)) {
                 unset($mapping['kdbx']);
             } else {
                 $mapping = [];
