@@ -47,7 +47,7 @@ class PageController extends Controller {
 	public function index($open) {
 		$params = ['keeweb' => $this->urlGenerator->linkToRoute('keeweb.page.keeweb')];
 		if (isset($open)) {
-			$params['config'] = 'config?file='.$open;
+			$params['config'] = 'config?file='.urlencode($open);
 		} else {
 			$params['config'] = 'config';
 		}
