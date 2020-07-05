@@ -23,6 +23,7 @@ git symbolic-ref -q HEAD && git pull || true
 
 git apply < ../mock_codesignconfig.patch
 git apply < ../default_settings.patch
+git apply < ../service_worker.patch
 
 npm uninstall --save-dev electron-prebuilt
 npm uninstall --save-dev electron-builder

@@ -1,0 +1,24 @@
+diff --git a/app/service-worker.js b/app/service-worker.js
+index 3b8fa90..835d200 100644
+--- a/app/service-worker.js
++++ b/app/service-worker.js
+@@ -13,7 +13,16 @@ self.addEventListener('install', event =>
+ );
+ 
+ self.addEventListener('fetch', event => {
+-    event.respondWith(
+-        caches.match(event.request.url).then(response => response || fetch(event.request))
+-    );
++    if( event.request.url.indexOf("keeweb?config") == -1 )
++    {   
++        event.respondWith(
++            fetch(event.request)
++        );
++    }
++    else
++    {
++        event.respondWith(
++            caches.match(event.request.url).then(response => response || fetch(event.request))
++        );
++    }
+ });
