@@ -1,51 +1,63 @@
-diff --git a/app/scripts/models/app-settings-model.js b/app/scripts/models/app-settings-model.js
-index eebf08ff..a23e475a 100644
---- a/app/scripts/models/app-settings-model.js
-+++ b/app/scripts/models/app-settings-model.js
-@@ -29,7 +29,7 @@ class AppSettingsModel extends Model {
- 
- AppSettingsModel.defineModelProperties(
-     {
--        theme: 'fb',
-+        theme: 'wh',
-         locale: null,
-         expandGroups: true,
-         listViewWidth: null,
-@@ -56,28 +56,30 @@ AppSettingsModel.defineModelProperties(
-         skipOpenLocalWarn: false,
-         hideEmptyFields: false,
-         skipHttpsWarning: false,
--        demoOpened: false,
-+        demoOpened: true,
-         fontSize: 0,
-         tableViewColumns: null,
-         generatorPresets: null,
-         generatorHidePassword: false,
-         cacheConfigSettings: false,
--        allowIframes: false,
-+        allowIframes: true,
- 
-         canOpen: true,
--        canOpenDemo: true,
-+        canOpenDemo: false,
-         canOpenSettings: true,
--        canCreate: true,
-+        canCreate: false,
-         canImportXml: true,
-         canImportCsv: true,
-         canRemoveLatest: true,
-         canExportXml: true,
-         canExportHtml: true,
- 
--        dropbox: true,
-+        dropbox: false,
-         webdav: true,
--        gdrive: true,
--        onedrive: true
-+        gdrive: false,
-+        onedrive: false,
-+
-+        webdavSaveMethod: 'put'
-     },
-     { extensions: true }
- );
+diff --git a/app/scripts/const/default-app-settings.js b/app/scripts/const/default-app-settings.js
+index c4dd290a..6b5aed13 100644
+--- a/app/scripts/const/default-app-settings.js
++++ b/app/scripts/const/default-app-settings.js
+@@ -1,5 +1,5 @@
+ const DefaultAppSettings = {
+-    theme: null, // UI theme
++    theme: 'wh', // UI theme
+     locale: null, // user interface language
+     expandGroups: true, // show entries from all subgroups
+     listViewWidth: null, // width of the entry list representation
+@@ -26,13 +26,13 @@ const DefaultAppSettings = {
+     skipOpenLocalWarn: false, // disable the warning about opening a local file
+     hideEmptyFields: false, // hide empty fields in entries
+     skipHttpsWarning: false, // disable the non-HTTPS warning
+-    demoOpened: false, // hide the demo button inside the More... menu
++    demoOpened: true, // hide the demo button inside the More... menu
+     fontSize: 0, // font size: 0, 1, 2
+     tableViewColumns: null, // columns displayed in the table view
+     generatorPresets: null, // presets used in the password generator
+     generatorHidePassword: false, // hide password in the generator
+     cacheConfigSettings: false, // cache config settings and use them if the config can't be loaded
+-    allowIframes: false, // allow displaying the app in IFrames
++    allowIframes: true, // allow displaying the app in IFrames
+     useGroupIconForEntries: false, // automatically use group icon when creating new entries
+     enableUsb: true, // enable interaction with USB devices
+     fieldLabelDblClickAutoType: false, // trigger auto-type by doubleclicking field label
+@@ -45,9 +45,9 @@ const DefaultAppSettings = {
+     yubiKeyStuckWorkaround: false, // enable the workaround for stuck YubiKeys
+
+     canOpen: true, // can select and open new files
+-    canOpenDemo: true, // can open a demo file
++    canOpenDemo: false, // can open a demo file
+     canOpenSettings: true, // can go to settings
+-    canCreate: true, // can create new files
++    canCreate: false, // can create new files
+     canImportXml: true, // can import files from XML
+     canImportCsv: true, // can import files from CSV
+     canRemoveLatest: true, // can remove files from the recent file list
+@@ -58,19 +58,19 @@ const DefaultAppSettings = {
+     canOpenGenerator: true, // can open password generator
+     canOpenOtpDevice: true, // can open OTP codes from USB tokens
+
+-    dropbox: true, // enable Dropbox integration
++    dropbox: false, // enable Dropbox integration
+     dropboxFolder: null, // default folder path
+     dropboxAppKey: null, // custom Dropbox app key
+     dropboxSecret: null, // custom Dropbox app secret
+
+     webdav: true, // enable WebDAV integration
+-    webdavSaveMethod: 'move', // how to save files with WebDAV: "move" or "put"
++    webdavSaveMethod: 'put', // how to save files with WebDAV: "move" or "put"
+
+-    gdrive: true, // enable Google Drive integration
++    gdrive: false, // enable Google Drive integration
+     gdriveClientId: null, // custom Google Drive client id
+     gdriveClientSecret: null, // custom Google Drive client secret
+
+-    onedrive: true, // enable OneDrive integration
++    onedrive: false, // enable OneDrive integration
+     onedriveClientId: null, // custom OneDrive client id
+     onedriveClientSecret: null // custom OneDrive client secret
+ };
