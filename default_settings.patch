@@ -1,5 +1,5 @@
 diff --git a/app/scripts/const/default-app-settings.js b/app/scripts/const/default-app-settings.js
-index c4dd290a..6b5aed13 100644
+index 33721f09..7494af5a 100644
 --- a/app/scripts/const/default-app-settings.js
 +++ b/app/scripts/const/default-app-settings.js
 @@ -1,5 +1,5 @@
@@ -24,8 +24,8 @@ index c4dd290a..6b5aed13 100644
 +    allowIframes: true, // allow displaying the app in IFrames
      useGroupIconForEntries: false, // automatically use group icon when creating new entries
      enableUsb: true, // enable interaction with USB devices
-     fieldLabelDblClickAutoType: false, // trigger auto-type by doubleclicking field label
-@@ -45,9 +45,9 @@ const DefaultAppSettings = {
+     nativeArgon2: true, // use native argon2 module
+@@ -46,9 +46,9 @@ const DefaultAppSettings = {
      yubiKeyStuckWorkaround: false, // enable the workaround for stuck YubiKeys
 
      canOpen: true, // can select and open new files
@@ -37,7 +37,7 @@ index c4dd290a..6b5aed13 100644
      canImportXml: true, // can import files from XML
      canImportCsv: true, // can import files from CSV
      canRemoveLatest: true, // can remove files from the recent file list
-@@ -58,19 +58,19 @@ const DefaultAppSettings = {
+@@ -59,19 +59,19 @@ const DefaultAppSettings = {
      canOpenGenerator: true, // can open password generator
      canOpenOtpDevice: true, // can open OTP codes from USB tokens
 
