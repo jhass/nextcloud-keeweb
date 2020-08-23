@@ -1,19 +1,21 @@
 #!/bin/bash
 set -e
 
+# This is the Git branch/tag if Keeweb
+#
+# Please keep in mind that the existing patch files may not work
+# when you update to a newer version!
+
+version="release-1.15"
+
+
 realpath() {
  [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
 
-
-if [ "$#" -ne 1 ]; then
-  echo "Usage: bin/build keeweb-version"
-  exit 1
-fi
-
 cd "$(dirname "$(realpath "$0")")/../keeweb-source"
 
-version="$1"
+echo "Building version $version"
 
 git clean -xf
 git fetch
@@ -23,7 +25,7 @@ git symbolic-ref -q HEAD && git pull || true
 
 git apply < ../mock_codesignconfig.patch
 git apply < ../default_settings.patch
-git apply < ../service_worker.patch
+git apply < ../updater.patch
 
 npm uninstall --save-dev electron-prebuilt
 npm uninstall --save-dev electron-builder
