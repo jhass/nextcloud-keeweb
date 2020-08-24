@@ -32,8 +32,9 @@ git clone https://github.com/keeweb/keeweb.git keeweb-source
 # Once npm is installed, install grunt and bower; instead of relying on your distro's, you can do
 sudo npm install -g grunt
 
-# Build nextcloud-keeweb
-bin/build keeweb_version # use "bin/build develop" for the keeweb development branch
+# Build nextcloud-keeweb - this will build with the current tested release
+# If you want to update to a newer version of Keeweb or use the development version, you also need to modify the patches for it
+bin/build
 
 # Finally, run the nextcloud server
 bin/server
