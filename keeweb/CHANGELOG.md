@@ -1,3 +1,10 @@
+nextcloud-keeweb (0.6.3)
+* Support Nextcloud 19 (thanks @lippl)
+* Bundle Keeweb 1.15.7 (thanks @arnowelzel)
+* Automate mimetype configuration (thanks @kesselb)
+* Improve service worker (thanks @HolgerHees)
+* Fix opening filenames with special characters (thanks @Deltachaos)
+
 nextcloud-keeweb (0.6.2)
 * Include service-worker.js
 * Fixup history cleanup script
