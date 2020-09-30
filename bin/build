@@ -6,7 +6,7 @@ set -e
 # Please keep in mind that the existing patch files may not work
 # when you update to a newer version!
 
-version="release-1.15"
+version="v1.15.7"
 
 
 realpath() {
