@@ -10,7 +10,7 @@ This integrates the two with each other. Just click on a \*.kdbx file in Your Ne
 ## Install
 
 1. Go to the releases page, download the latest version.
-1. Extract it to `your_nextcloud/apps`, for example with `tar xvf keeweb-0.6.3.tar.gz -C /path/to/your/nextcloud/apps`.
+1. Extract it to `your_nextcloud/apps`, for example with `tar xvf keeweb-0.6.4.tar.gz -C /path/to/your/nextcloud/apps`.
 1. Go to "Apps" and then "Not enabled", scroll down to "Experimental" and enable it.
 
 To update to a new version, simply repeat these steps.
@@ -22,7 +22,7 @@ git clone https://github.com/jhass/nextcloud-keeweb.git
 cd nextcloud-keeweb
 
 # You can skip this if you only want to build the appstore or source packages
-git clone -b stable18 https://github.com/nextcloud/server.git nextcloud
+git clone -b stable19 https://github.com/nextcloud/server.git nextcloud
 ln -sf "$(pwd)/keeweb" nextcloud/apps
 cd nextcloud && git submodule update --init && cd -
 
