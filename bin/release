@@ -2,10 +2,15 @@
 
 set -e
 
-SIGNING_KEY="$HOME/.nextcloud/certificates/keeweb.key"
+realpath() {
+ [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
 
-if [ "$#" -ne 2 ]; then
-  echo "Usage: bin/release version keeweb-version"
+: "${SIGNING_KEY:="$HOME/.nextcloud/certificates/keeweb.key"}"
+version="$1"
+
+if [ -z "$version" ]; then
+  echo "Usage: bin/release version"
   exit 1
 fi
 
@@ -19,8 +24,6 @@ if [ ! -f "$SIGNING_KEY" ]; then
   exit 1
 fi
 
-version="$1"
-keeweb_version="$2"
 
 cd "$(dirname "$(realpath "$0")")/.."
 
@@ -29,7 +32,7 @@ if ! grep "nextcloud-keeweb ($version)" keeweb/CHANGELOG.md >/dev/null; then
   exit 1
 fi
 
-bin/build "$keeweb_version"
+bin/build
 
 sed -i -e "s|tar xvf keeweb-.\+\.tar\.gz|tar xvf keeweb-$version.tar.gz|" README.md
 sed -i -e "s|<version>.\+</version>|<version>$version</version>|" keeweb/appinfo/info.xml

@@ -6,7 +6,7 @@ require "openssl"
 require "net/http"
 require "base64"
 
-KEYFILE = "#{ENV["HOME"]}/.nextcloud/certificates/keeweb.key"
+KEYFILE = ENV["SIGNING_KEY"] || "#{ENV["HOME"]}/.nextcloud/certificates/keeweb.key"
 
 abort "Usage: bin/publish version tarball" if ARGV.size != 2
 abort "Please set NC_AUTH_TOKEN" unless ENV["NC_AUTH_TOKEN"]

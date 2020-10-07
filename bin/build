@@ -1,19 +1,24 @@
 #!/bin/bash
 set -e
 
-# This is the Git branch/tag if Keeweb
-#
-# Please keep in mind that the existing patch files may not work
-# when you update to a newer version!
-
-version="release-1.15"
-
-
 realpath() {
  [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
 
-cd "$(dirname "$(realpath "$0")")/../keeweb-source"
+cd "$(dirname "$(realpath "$0")")/.."
+
+if [ ! -d keeweb-source || ! -d keeweb-source/.git ]; then
+  echo "keeweb-source is missing or not a git repository"
+  exit 1
+fi
+
+# This is the Git branch/tag of Keeweb
+#
+# Please keep in mind that the existing patch files may not work
+# when you update to a newer version!
+version="$(cat keeweb-version)"
+
+cd keeweb-source
 
 echo "Building version $version"
 
@@ -31,7 +36,6 @@ npm uninstall --save-dev electron-prebuilt
 npm uninstall --save-dev electron-builder
 npm uninstall --save-dev grunt-electron
 npm install --no-shrinkwrap --no-package-lock
-
 
 grunt build-web-app --skip-sign --force
 cp -v dist/index.html ../keeweb/templates/keeweb.php
