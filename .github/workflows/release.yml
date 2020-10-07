@@ -3,7 +3,7 @@
 name: Release
 on:
   workflow_dispatch:
-    input:
+    inputs:
       version:
         description: "The version to build, tag and publish to the appstore, without any v prefix"
         required: true
@@ -29,8 +29,8 @@ jobs:
           echo "$APPSTORE_KEY" > "$SIGNING_KEY"
           bin/release "$VERSION"
         env:
-          VERSION: ${{github.event.input.version}}
-          COMMIT_EMAIL: ${{github.event.input.commit_email}}
+          VERSION: ${{github.event.inputs.version}}
+          COMMIT_EMAIL: ${{github.event.inputs.commit_email}}
           APPSTORE_KEY: ${{secrets.APPSTORE_KEY}}
           NC_AUTH_TOKEN: ${{secrets.NC_AUTH_TOKEN}}
           SIGNING_KEY: ${{github.workspace}}/keeweb.key
