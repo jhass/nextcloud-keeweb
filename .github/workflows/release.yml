@@ -1,0 +1,36 @@
+# Before running this, have the changelog and keeweb-version files updated for the new version
+
+name: Release
+on:
+  workflow_dispatch:
+    input:
+      version:
+        description: "The version to build, tag and publish to the appstore, without any v prefix"
+        required: true
+      commit_email:
+        description: "The email address used for the release commit"
+        required: true
+        default: "me+release-ci@jhass.eu"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare Keeweb
+        run: |
+          git clone -b "$(cat keeweb-version)" https://github.com/keeweb/keeweb.git keeweb-source
+          sudo npm install -g grunt
+      - name: Build and publish
+        run: |
+          git config --local user.email "$COMMIT_EMAIL"
+          git config --local user.name  "Github Actions Release Job"
+          git remote add origin "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+          echo "$APPSTORE_KEY" > "$SIGNING_KEY"
+          bin/release "$VERSION"
+        env:
+          VERSION: ${{github.event.input.version}}
+          COMMIT_EMAIL: ${{github.event.input.commit_email}}
+          APPSTORE_KEY: ${{secrets.APPSTORE_KEY}}
+          NC_AUTH_TOKEN: ${{secrets.NC_AUTH_TOKEN}}
+          SIGNING_KEY: ${{github.workspace}}/keeweb.key
