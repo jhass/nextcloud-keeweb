@@ -21,9 +21,6 @@
         <install>
             <step>OCA\Keeweb\Migration\RegisterMimeType</step>
         </install>
-        <post-migrate>
-            <step>OCA\Keeweb\Migration\RegisterMimeType</step>
-        </post-migrate>
         <uninstall>
             <step>OCA\Keeweb\Migration\UnregisterMimeType</step>
         </uninstall>
