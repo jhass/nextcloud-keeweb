@@ -22,7 +22,7 @@ git clone https://github.com/jhass/nextcloud-keeweb.git
 cd nextcloud-keeweb
 
 # You can skip this if you only want to build the appstore or source packages
-git clone -b stable18 https://github.com/nextcloud/server.git nextcloud
+git clone -b stable20 https://github.com/nextcloud/server.git nextcloud
 ln -sf "$(pwd)/keeweb" nextcloud/apps
 cd nextcloud && git submodule update --init && cd -
 

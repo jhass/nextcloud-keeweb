@@ -7,7 +7,7 @@ realpath() {
 
 cd "$(dirname "$(realpath "$0")")/.."
 
-if [ ! -d keeweb-source || ! -d keeweb-source/.git ]; then
+if [[ ! -d keeweb-source || ! -d keeweb-source/.git ]]; then
   echo "keeweb-source is missing or not a git repository"
   exit 1
 fi
