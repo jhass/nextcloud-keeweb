@@ -1,8 +1,8 @@
 diff --git a/Gruntfile.js b/Gruntfile.js
-index bc248e14..3601ce64 100644
+index ec5a2f7d..682f4a0a 100644
 --- a/Gruntfile.js
 +++ b/Gruntfile.js
-@@ -29,9 +29,7 @@ module.exports = function (grunt) {
+@@ -30,9 +30,7 @@ module.exports = function (grunt) {
      const zipCommentPlaceholder =
          zipCommentPlaceholderPart + '.'.repeat(512 - zipCommentPlaceholderPart.length);
      const electronVersion = pkg.dependencies.electron.replace(/^\D/, '');
@@ -10,6 +10,6 @@ index bc248e14..3601ce64 100644
 -    const getCodeSignConfig = () =>
 -        skipSign ? { identities: {} } : require('./keys/codesign.json');
 +    const getCodeSignConfig = { identities: {} };
-
-     const webpackOptions = {
-         date,
+ 
+     const sha = execSync('git rev-parse --short HEAD').toString('utf8').trim();
+ 
