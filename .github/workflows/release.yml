@@ -34,3 +34,4 @@ jobs:
           APPSTORE_KEY: ${{secrets.APPSTORE_KEY}}
           NC_AUTH_TOKEN: ${{secrets.NC_AUTH_TOKEN}}
           SIGNING_KEY: ${{github.workspace}}/keeweb.key
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
