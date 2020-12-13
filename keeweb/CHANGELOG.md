@@ -1,3 +1,8 @@
+nextcloud-keeweb (0.6.4)
+* Support Nextcloud 20 (thanks @arnowelzel)
+* Bundle Keeweb 1.16.3 (thanks @arnowelzel)
+* Fix CSP issues on Safari (thanks @jstark1)
+
 nextcloud-keeweb (0.6.3)
 * Support Nextcloud 19 (thanks @lippl)
 * Bundle Keeweb 1.15.7 (thanks @arnowelzel)
