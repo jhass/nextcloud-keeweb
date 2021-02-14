@@ -1,3 +1,7 @@
+nextcloud-keeweb (0.6.5)
+* Support Nextcloud 21 (thanks @arnowelzel)
+* Bundle Keeweb 1.16.7 (thanks @arnowelzel)
+
 nextcloud-keeweb (0.6.4)
 * Support Nextcloud 20 (thanks @arnowelzel)
 * Bundle Keeweb 1.16.3 (thanks @arnowelzel)
