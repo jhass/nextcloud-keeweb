@@ -1,15 +1,15 @@
 diff --git a/app/scripts/const/default-app-settings.js b/app/scripts/const/default-app-settings.js
-index 7e80cc10..d6c8d31e 100644
+index 7afc88c3..89d37414 100644
 --- a/app/scripts/const/default-app-settings.js
 +++ b/app/scripts/const/default-app-settings.js
 @@ -1,5 +1,5 @@
  const DefaultAppSettings = {
 -    theme: null, // UI theme
 +    theme: 'light', // UI theme
+     autoSwitchTheme: false, // automatically switch between light and dark theme
      locale: null, // user interface language
      expandGroups: true, // show entries from all subgroups
-     listViewWidth: null, // width of the entry list representation
-@@ -26,13 +26,13 @@ const DefaultAppSettings = {
+@@ -29,13 +29,13 @@ const DefaultAppSettings = {
      skipOpenLocalWarn: false, // disable the warning about opening a local file
      hideEmptyFields: false, // hide empty fields in entries
      skipHttpsWarning: false, // disable the non-HTTPS warning
@@ -25,7 +25,7 @@ index 7e80cc10..d6c8d31e 100644
      useGroupIconForEntries: false, // automatically use group icon when creating new entries
      enableUsb: true, // enable interaction with USB devices
      fieldLabelDblClickAutoType: false, // trigger auto-type by doubleclicking field label
-@@ -45,9 +45,9 @@ const DefaultAppSettings = {
+@@ -59,9 +59,9 @@ const DefaultAppSettings = {
      yubiKeyStuckWorkaround: false, // enable the workaround for stuck YubiKeys
  
      canOpen: true, // can select and open new files
@@ -37,7 +37,7 @@ index 7e80cc10..d6c8d31e 100644
      canImportXml: true, // can import files from XML
      canImportCsv: true, // can import files from CSV
      canRemoveLatest: true, // can remove files from the recent file list
-@@ -58,20 +58,20 @@ const DefaultAppSettings = {
+@@ -72,20 +72,20 @@ const DefaultAppSettings = {
      canOpenGenerator: true, // can open password generator
      canOpenOtpDevice: true, // can open OTP codes from USB tokens
  
@@ -60,5 +60,5 @@ index 7e80cc10..d6c8d31e 100644
 -    onedrive: true, // enable OneDrive integration
 +    onedrive: false, // enable OneDrive integration
      onedriveClientId: null, // custom OneDrive client id
-     onedriveClientSecret: null // custom OneDrive client secret
- };
+     onedriveClientSecret: null, // custom OneDrive client secret
+     onedriveTenantId: null, // custom OneDrive tenant id
