@@ -1,3 +1,9 @@
+## 0.6.8 - 2021-11-30
+- Update changelog format (thanks @siccovansas)
+
+## 0.6.7 - 2021-11-30
+- Support Nextcloud 23 (thanks @arnowelzel)
+
 ## 0.6.6 - 2021-08-11
 - Support Nextcloud 22 (thanks @arnowelzel)
 - Bundle Keeweb 1.18.7 (thanks @thinkofher)
