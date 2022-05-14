@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.9)
+* Support Nextcloud 24 (thanks @arnowelzel)
+
 nextcloud-keeweb (0.6.8)
 * Support Nextcloud 23 (thanks @arnowelzel)
 
