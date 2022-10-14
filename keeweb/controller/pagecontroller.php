@@ -131,9 +131,10 @@ class PageController extends Controller {
 		$csp->addAllowedImageDomain("'self'");
 		$csp->addAllowedImageDomain("data:");
 		$csp->addAllowedImageDomain("blob:");
-		$csp->addAllowedImageDomain("https://favicon.keeweb.info");
+		$csp->addAllowedImageDomain('https://services.keeweb.info');
 		$csp->addAllowedScriptDomain("'self'");
 		$csp->addAllowedConnectDomain("'self'");
+		$csp->addAllowedConnectDomain('https://services.keeweb.info');
 		$csp->addAllowedScriptDomain('https://plugins.keeweb.info');
 		$csp->addAllowedConnectDomain('https://plugins.keeweb.info');
 		$csp->addAllowedChildSrcDomain("blob:");
