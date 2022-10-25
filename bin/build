@@ -32,6 +32,7 @@ git apply < ../mock_codesignconfig.patch
 git apply < ../default_settings.patch
 git apply < ../updater.patch
 
+npm install
 npm ci
 
 grunt build-web-app --skip-sign --force
