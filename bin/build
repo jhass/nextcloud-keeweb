@@ -35,7 +35,7 @@ git apply < ../updater.patch
 npm install
 npm ci
 
-grunt build-web-app --skip-sign --force
+NODE_OPTIONS=--openssl-legacy-provider npx grunt build-web-app --skip-sign --force
 cp -v dist/index.html ../keeweb/templates/keeweb.php
 cp -v dist/service-worker.js ../keeweb/templates/
 sed -i -e 's|<?|<?php echo "<?"; ?>|g' ../keeweb/templates/keeweb.php
