@@ -13,7 +13,7 @@
     <website>https://github.com/jhass/nextcloud-keeweb</website>
     <bugs>https://github.com/jhass/nextcloud-keeweb/issues</bugs>
     <repository>https://github.com/jhass/nextcloud-keeweb</repository>
-    <screenshot>https://cloud.aeshna.de/keeweb.gif</screenshot>
+    <screenshot>https://arnowelzel.de/download/nextcloud-keeweb.gif</screenshot>
     <dependencies>
         <nextcloud min-version="16" max-version="26" />
     </dependencies>
