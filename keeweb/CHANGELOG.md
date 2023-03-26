@@ -1,5 +1,6 @@
 nextcloud-keeweb (0.6.11)
 * Support Nextcloud 26 (thanks @arnowelzel)
+* Fix build (thanks @MikkCZ)
 
 nextcloud-keeweb (0.6.10)
 * Support Nextcloud 25 (thanks @rafiwui)
