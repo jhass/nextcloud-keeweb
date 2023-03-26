@@ -10,7 +10,7 @@ This integrates the two with each other. Just click on a \*.kdbx file in Your Ne
 ## Install
 
 1. Go to the releases page, download the latest version.
-1. Extract it to `your_nextcloud/custom_apps`, for example with `tar xvf keeweb-0.6.10.tar.gz -C /path/to/your/nextcloud/custom_apps`.
+1. Extract it to `your_nextcloud/custom_apps`, for example with `tar xvf keeweb-0.6.11.tar.gz -C /path/to/your/nextcloud/custom_apps`.
 1. Go to "Apps" and then "Not enabled", scroll down to "Experimental" and enable it.
 
 To update to a new version, simply repeat these steps.
