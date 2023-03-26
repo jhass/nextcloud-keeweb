@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.12)
+* Fix screenshot for store entry (thanks @arnowelzel)
+
 nextcloud-keeweb (0.6.11)
 * Support Nextcloud 26 (thanks @arnowelzel)
 * Fix build (thanks @MikkCZ)
