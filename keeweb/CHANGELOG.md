@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.11)
+* Support Nextcloud 26 (thanks @arnowelzel)
+
 nextcloud-keeweb (0.6.10)
 * Support Nextcloud 25 (thanks @rafiwui)
 * Change favicon-downloader domain to fix a problem with download favicons (thanks @Slug-V)
