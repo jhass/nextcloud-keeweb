@@ -15,8 +15,6 @@ use OC\Files\Type\Detection;
 use OCP\AppFramework\App;
 use OCA\Keeweb\Controller\PageController;
 
-require_once __DIR__ . '/autoload.php';
-
 class Application extends App {
  public function __construct(array $urlParams=array()){
         parent::__construct('keeweb', $urlParams);
