@@ -25,4 +25,13 @@
             <step>OCA\Keeweb\Migration\UnregisterMimeType</step>
         </uninstall>
     </repair-steps>
+    <navigations>
+        <navigation>
+            <id>keeweb</id>
+            <order>2</order>
+            <route>keeweb.page.index</route>
+            <icon>app.svg</icon>
+            <name>Keeweb</name>
+        </navigation>
+    </navigations>
 </info>
