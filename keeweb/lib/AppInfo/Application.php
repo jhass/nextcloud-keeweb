@@ -11,15 +11,22 @@
 
 namespace OCA\Keeweb\AppInfo;
 
-use OC\Files\Type\Detection;
-use OCP\AppFramework\App;
 use OCA\Keeweb\Controller\PageController;
+use OCP\AppFramework\App;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\EventDispatcher\IEventDispatcher;
+use OCP\Util;
+use Psr\Container\ContainerInterface;
 
-class Application extends App {
- public function __construct(array $urlParams=array()){
-        parent::__construct('keeweb', $urlParams);
-        $container = $this->getContainer();
-        $container->registerService('PageController', function($c) {
+class Application extends App implements IBootstrap {
+    public function __construct(){
+        parent::__construct('keeweb');
+    }
+
+    public function register(IRegistrationContext $context): void {
+        $context->registerService('PageController', function (ContainerInterface $c) {
             return new PageController(
                 $c->query('AppName'),
                 $c->query('Request'),
@@ -28,13 +35,15 @@ class Application extends App {
             );
         });
     }
-}
 
-// Script for registering file actions
-$eventDispatcher = \OC::$server->getEventDispatcher();
-$eventDispatcher->addListener(
-	'OCA\Files::loadAdditionalScripts',
-	function() {
-		\OCP\Util::addScript('keeweb', 'viewer');
-	}
-);
+    public function boot(IBootContext $context): void {
+        $context->injectFn(function (IEventDispatcher $eventDispatcher) {
+            $eventDispatcher->addListener(
+                'OCA\Files::loadAdditionalScripts',
+                function() {
+                    Util::addScript('keeweb', 'viewer');
+                }
+            );
+        });
+    }
+}
