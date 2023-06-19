@@ -11,15 +11,22 @@
 
 namespace OCA\Keeweb\AppInfo;
 
-use OC\Files\Type\Detection;
-use OCP\AppFramework\App;
 use OCA\Keeweb\Controller\PageController;
+use OCP\AppFramework\App;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\EventDispatcher\IEventDispatcher;
+use OCP\Util;
+use Psr\Container\ContainerInterface;
 
-class Application extends App {
- public function __construct(array $urlParams=array()){
-        parent::__construct('keeweb', $urlParams);
-        $container = $this->getContainer();
-        $container->registerService('PageController', function($c) {
+class Application extends App implements IBootstrap {
+    public function __construct(){
+        parent::__construct('keeweb');
+    }
+
+    public function register(IRegistrationContext $context): void {
+        $context->registerService('PageController', function (ContainerInterface $c) {
             return new PageController(
                 $c->query('AppName'),
                 $c->query('Request'),
@@ -28,40 +35,15 @@ class Application extends App {
             );
         });
     }
+
+    public function boot(IBootContext $context): void {
+        $context->injectFn(function (IEventDispatcher $eventDispatcher) {
+            $eventDispatcher->addListener(
+                'OCA\Files::loadAdditionalScripts',
+                function() {
+                    Util::addScript('keeweb', 'viewer');
+                }
+            );
+        });
+    }
 }
-
-$app = \OC::$server->query(Application::class);
-$container = $app->getContainer();
-
-$container->query('OCP\INavigationManager')->add(function () use ($container) {
-	$urlGenerator = $container->query('OCP\IURLGenerator');
-	$l10n = $container->query('OCP\IL10N');
-	return [
-		// the string under which your app will be referenced in Nextcloud
-		'id' => 'keeweb',
-
-		// sorting weight for the navigation. The higher the number, the higher
-		// will it be listed in the navigation
-		'order' => 2,
-
-		// the route that will be shown on startup
-		'href' => $urlGenerator->linkToRoute('keeweb.page.index'),
-
-		// the icon that will be shown in the navigation
-		// this file needs to exist in img/
-		'icon' => $urlGenerator->imagePath('keeweb', 'app.svg'),
-
-		// the title of your application. This will be used in the
-		// navigation or on the settings page of your app
-		'name' => $l10n->t('Keeweb'),
-	];
-});
-
-// Script for registering file actions
-$eventDispatcher = \OC::$server->getEventDispatcher();
-$eventDispatcher->addListener(
-	'OCA\Files::loadAdditionalScripts',
-	function() {
-		\OCP\Util::addScript('keeweb', 'viewer');
-	}
-);
