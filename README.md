@@ -5,7 +5,16 @@
 
 This integrates the two with each other. Just click on a \*.kdbx file in Your Nextcloud to open it.
 
-![demo](https://cloud.aeshna.de/u/mrzyx/keeweb.gif)
+![demo](https://arnowelzel.de/download/nextcloud-keeweb.gif)
+
+**Note about Nextcloud 28 and newer:**
+
+**Since KeeWeb itself is unmaintained and Nextcloud 28 changed its API so KeeWeb can not be integrated any longer
+in the way it was don until Nextcloud 27, there is no active support any longer for this app - sorry!**
+
+**However if you have the knowledge and time to help maintaining KeeWeb, see https://github.com/jhass/nextcloud-keeweb/issues/221,
+https://github.com/jhass/nextcloud-keeweb/issues/204 and https://github.com/jhass/nextcloud-keeweb/issues/229.
+Any help is appreciated!**
 
 ## Install
 
