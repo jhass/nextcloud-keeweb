@@ -1,12 +1,15 @@
 <?xml version="1.0"?>
-<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>keeweb</id>
     <name>Keeweb</name>
     <summary>Open Keepass stores</summary>
-    <description>Open Keepass stores inside Nextcloud with Keeweb just by clicking on an *.kdbx file in your Nextcloud.</description>
-    <version>0.6.13</version>
+    <description>Open Keepass stores inside Nextcloud with Keeweb just by clicking on an *.kdbx file in your
+        Nextcloud.
+    </description>
+    <version>0.6.14</version>
     <licence>agpl</licence>
-    <author>Jonne Haß, Arno Welzel</author>
+    <author>Jonne Haß, Arno Welzel, Florian Forestier</author>
     <namespace>Keeweb</namespace>
     <category>tools</category>
     <category>integration</category>
@@ -15,7 +18,7 @@
     <repository>https://github.com/jhass/nextcloud-keeweb</repository>
     <screenshot>https://arnowelzel.de/download/nextcloud-keeweb.gif</screenshot>
     <dependencies>
-        <nextcloud min-version="16" max-version="27" />
+        <nextcloud min-version="16" max-version="28"/>
     </dependencies>
     <repair-steps>
         <install>

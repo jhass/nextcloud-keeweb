@@ -2,9 +2,9 @@
 
 namespace OCA\Keeweb\Migration;
 
-use OCP\Files\IMimeTypeLoader;
+require \OC::$SERVERROOT . "/3rdparty/autoload.php";
+
 use OCP\Migration\IOutput;
-use OCP\Migration\IRepairStep;
 
 class RegisterMimeType extends MimeTypeMigration
 {
@@ -21,18 +21,14 @@ class RegisterMimeType extends MimeTypeMigration
 
     private function registerForNewFiles()
     {
-        $mapping = ['kdbx' => ['application/x-kdbx']];
-        $mappingFile = \OC::$configDir . self::CUSTOM_MIMETYPEMAPPING;
+        $configDir = \OC::$configDir;
+        $mimetypealiasesFile = $configDir . self::CUSTOM_MIMETYPEALIASES;
+        $mimetypemappingFile = $configDir . self::CUSTOM_MIMETYPEMAPPING;
 
-        if (file_exists($mappingFile)) {
-            $existingMapping = json_decode(file_get_contents($mappingFile), true);
-            if (json_last_error() === JSON_ERROR_NONE && is_array($existingMapping)) {
-                $mapping = array_merge($existingMapping, $mapping);
-            }
-        }
-
-        file_put_contents($mappingFile, json_encode($mapping, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+        $this->appendToFile($mimetypealiasesFile, ['application/x-kdbx' => 'kdbx']);
+        $this->appendToFile($mimetypemappingFile, ['kdbx' => ['application/x-kdbx']]);
     }
+
 
     public function run(IOutput $output)
     {
@@ -45,5 +41,17 @@ class RegisterMimeType extends MimeTypeMigration
         $this->registerForNewFiles();
 
         $output->info('The mimetype was successfully registered.');
+    }
+
+    private function appendToFile(string $filename, array $data) {
+        $obj = [];
+        if (file_exists($filename)) {
+            $content = file_get_contents($filename);
+            $obj = json_decode($content, true);
+        }
+        foreach ($data as $key => $value) {
+            $obj[$key] = $value;
+        }
+        file_put_contents($filename, json_encode($obj,  JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
     }
 }
