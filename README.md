@@ -9,12 +9,12 @@ This integrates the two with each other. Just click on a \*.kdbx file in Your Ne
 
 **Note about Nextcloud 28 and newer:**
 
-**Since KeeWeb itself is unmaintained and Nextcloud 28 changed its API so KeeWeb can not be integrated any longer
-in the way it was done until Nextcloud 27, there is no active support any longer for this app - sorry!**
+Thanks to the help by @florian-forestier, in January 2024 a new release was published which supports Nextcloud 28.
 
-**However if you have the knowledge and time to help maintaining KeeWeb, see https://github.com/jhass/nextcloud-keeweb/issues/221,
-https://github.com/jhass/nextcloud-keeweb/issues/204 and https://github.com/jhass/nextcloud-keeweb/issues/229.
-Any help is appreciated!**
+However the upstream project "KeeWeb" itself is not maintained any longer - so if you can help, please have a look at
+https://github.com/jhass/nextcloud-keeweb/issues/204 (KeeWeb upstream maintenance) and/or
+https://github.com/jhass/nextcloud-keeweb/issues/221 (Maintainers for KeeWeb for Nextcloud).
+Any help is appreciated!
 
 ## Install
 
