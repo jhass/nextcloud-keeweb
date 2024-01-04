@@ -16,7 +16,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Prepare Keeweb
         run: |
           git clone -b "$(cat keeweb-version)" https://github.com/keeweb/keeweb.git keeweb-source
