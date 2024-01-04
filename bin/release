@@ -62,7 +62,8 @@ v$version
 $changelog
 EOF
 
-hub release create -F /tmp/release_notes -a "$tarball" "v$version"
+gh release create "v$version" -F /tmp/release_notes
+gh release upload "v$version" "$tarball"
 rm /tmp/release_notes
 
 bin/publish v$version "$tarball"
