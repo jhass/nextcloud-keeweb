@@ -1,5 +1,5 @@
 nextcloud-keeweb (0.6.14)
-* Updated frontend to fix compatibility with Nextcloud 28 (thanks @florian-forestier)
+* Updated application to fix compatibility with Nextcloud 28 (thanks @florian-forestier)
 
 nextcloud-keeweb (0.6.13)
 * Updated application structure and fix compatibility with Nextcloud 27 (thanks @burned42)
