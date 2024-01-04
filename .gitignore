@@ -5,3 +5,8 @@ keeweb-source/
 keeweb/build/
 keeweb/templates/keeweb.php
 keeweb/templates/service-worker.js
+keeweb/js/viewer.js
+keeweb/js/viewer.js.map
+keeweb/js/viewer.js.LICENSE.txt
+keeweb/node_modules/
+.idea/

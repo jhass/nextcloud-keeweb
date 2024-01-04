@@ -10,22 +10,30 @@
  */
 
 namespace OCA\Keeweb\AppInfo;
-
 use OCA\Keeweb\Controller\PageController;
 use OCP\AppFramework\App;
-use OCP\AppFramework\Bootstrap\IBootContext;
-use OCP\AppFramework\Bootstrap\IBootstrap;
-use OCP\AppFramework\Bootstrap\IRegistrationContext;
-use OCP\EventDispatcher\IEventDispatcher;
 use OCP\Util;
 use Psr\Container\ContainerInterface;
+use OCP\Files\IMimeTypeDetector;
 
-class Application extends App implements IBootstrap {
+class Application extends App {
     public function __construct(){
-        parent::__construct('keeweb');
-    }
+        $appName = "keeweb";
 
-    public function register(IRegistrationContext $context): void {
+        parent::__construct($appName);
+
+        if (array_key_exists("REQUEST_URI", \OC::$server->getRequest()->server))
+        {
+            $url = \OC::$server->getRequest()->server["REQUEST_URI"];
+            if (isset($url)) {
+                if (preg_match("%/apps/files(/.*)?%", $url) || str_contains($url, "/s/")) // Files app and file sharing
+                {
+                    Util::addScript($appName, "viewer");
+                }
+            }
+        }
+
+        $context = $this->getContainer();
         $context->registerService('PageController', function (ContainerInterface $c) {
             return new PageController(
                 $c->query('AppName'),
@@ -34,16 +42,11 @@ class Application extends App implements IBootstrap {
                 $c->query('Config')
             );
         });
+
+        $detector = $context->query(IMimeTypeDetector::class);
+        $detector->getAllMappings();
+        $detector->registerType("kdbx", "application/x-kdbx");
+
     }
 
-    public function boot(IBootContext $context): void {
-        $context->injectFn(function (IEventDispatcher $eventDispatcher) {
-            $eventDispatcher->addListener(
-                'OCA\Files::loadAdditionalScripts',
-                function() {
-                    Util::addScript('keeweb', 'viewer');
-                }
-            );
-        });
-    }
 }

@@ -1,0 +1,23 @@
+{
+  "name": "keeweb",
+  "description": "Keeweb Nextcloud Integration",
+  "private": true,
+  "scripts": {
+    "build": "NODE_ENV=production webpack --progress --config webpack.js"
+  },
+  "dependencies": {
+    "@nextcloud/files": "^3.0.0",
+    "@nextcloud/webpack-vue-config": "^6.0.0",
+    "@nextcloud/browserslist-config": "^3.0.0"
+  },
+  "browserslist": [
+    "extends @nextcloud/browserslist-config"
+  ],
+  "engines": {
+    "node": "^20.0.0",
+    "npm": "^9.0.0"
+  },
+  "devDependencies": {
+    "babel-loader-exclude-node-modules-except": "^1.2.1"
+  }
+}

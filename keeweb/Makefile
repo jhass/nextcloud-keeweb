@@ -85,9 +85,9 @@ endif
 .PHONY: npm
 npm:
 ifeq (,$(wildcard $(CURDIR)/package.json))
-	cd js && $(npm) run build
+	cd js && $(npm) install && $(npm) run build
 else
-	npm run build
+	$(npm) install && $(npm) run build
 endif
 
 # Removes the appstore build
@@ -107,6 +107,7 @@ distclean: clean
 # Builds the source and appstore package
 .PHONY: dist
 dist:
+	make build
 	make source
 	make appstore
 
@@ -118,6 +119,10 @@ source:
 	tar --exclude-vcs \
 	--exclude="../$(app_name)/build" \
 	--exclude="../$(app_name)/js/node_modules" \
+	--exclude="../$(app_name)/js/viewer.js.LICENSE.txt" \
+	--exclude="../$(app_name)/js/viewer.js.map" \
+	--exclude="../$(app_name)/package.json" \
+	--exclude="../$(app_name)/package-lock.json" \
 	--exclude="../$(app_name)/node_modules" \
 	--exclude="../$(app_name)/*.log" \
 	--exclude="../$(app_name)/js/*.log" \
@@ -138,6 +143,10 @@ appstore:
 	--exclude="../$(app_name)/js/node_modules" \
 	--exclude="../$(app_name)/js/tests" \
 	--exclude="../$(app_name)/js/test" \
+	--exclude="../$(app_name)/js/viewer.js.LICENSE.txt" \
+	--exclude="../$(app_name)/js/viewer.js.map" \
+	--exclude="../$(app_name)/package-lock.json" \
+	--exclude="../$(app_name)/node_modules" \
 	--exclude="../$(app_name)/js/*.log" \
 	--exclude="../$(app_name)/js/package.json" \
 	--exclude="../$(app_name)/js/bower.json" \

@@ -136,12 +136,10 @@ class PageController extends Controller {
 		$csp->addAllowedConnectDomain("'self'");
 		$csp->addAllowedConnectDomain('https://services.keeweb.info');
 		$csp->addAllowedScriptDomain('https://plugins.keeweb.info');
+		$csp->addAllowedScriptDomain("'unsafe-inline'");
 		$csp->addAllowedConnectDomain('https://plugins.keeweb.info');
-		$csp->addAllowedChildSrcDomain("blob:");
-		$csp->addAllowedChildSrcDomain("'self'");
-		$csp->allowEvalScript(true);
-		$csp->allowInlineScript(true);
-		$csp->allowInlineStyle(true);
+        $csp->allowEvalScript(true);
+		$csp->allowInlineStyle();
 		return $csp;
 	}
 }

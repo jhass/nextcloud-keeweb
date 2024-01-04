@@ -19,10 +19,10 @@
  */
 return [
     'routes' => [
-     ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
-	   ['name' => 'page#keeweb', 'url' => '/keeweb', 'verb' => 'GET'],
-	   ['name' => 'page#manifest', 'url' => '/manifest.appcache', 'verb' => 'GET'],
-     ['name' => 'page#config', 'url' => '/config', 'verb' => 'GET'],
-     ['name' => 'page#serviceworker', 'url' => '/service-worker.js', 'verb' => 'GET']
+        ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
+        ['name' => 'page#keeweb', 'url' => '/keeweb', 'verb' => 'GET'],
+        ['name' => 'page#manifest', 'url' => '/manifest.appcache', 'verb' => 'GET'],
+        ['name' => 'page#config', 'url' => '/config', 'verb' => 'GET'],
+        ['name' => 'page#serviceworker', 'url' => '/service-worker.js', 'verb' => 'GET']
     ]
 ];
