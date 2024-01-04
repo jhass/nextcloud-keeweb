@@ -18,7 +18,7 @@
     <repository>https://github.com/jhass/nextcloud-keeweb</repository>
     <screenshot>https://arnowelzel.de/download/nextcloud-keeweb.gif</screenshot>
     <dependencies>
-        <nextcloud min-version="16" max-version="28"/>
+        <nextcloud min-version="28" max-version="28"/>
     </dependencies>
     <repair-steps>
         <install>
