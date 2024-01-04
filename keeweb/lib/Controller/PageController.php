@@ -137,8 +137,9 @@ class PageController extends Controller {
 		$csp->addAllowedConnectDomain('https://services.keeweb.info');
 		$csp->addAllowedScriptDomain('https://plugins.keeweb.info');
 		$csp->addAllowedScriptDomain("'unsafe-inline'");
+		$csp->addAllowedScriptDomain("blob:");
 		$csp->addAllowedConnectDomain('https://plugins.keeweb.info');
-        $csp->allowEvalScript(true);
+		$csp->allowEvalScript(true);
 		$csp->allowInlineStyle();
 		return $csp;
 	}
