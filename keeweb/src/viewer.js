@@ -1,4 +1,5 @@
 import {registerFileAction, FileAction, Permission, DefaultType} from '@nextcloud/files'
+import {generateUrl} from '@nextcloud/router'
 
 const fileAction = new FileAction({
     id: 'keeweb',
@@ -15,7 +16,7 @@ const fileAction = new FileAction({
     },
     async exec(node, view, dir) {
         let a = node.source.split("/")
-        OC.redirect(`/apps/keeweb/?open=${dir === "/" ? "/" : dir + "/"}${a[a.length-1]}`)
+        OC.redirect(generateUrl(`/apps/keeweb/?open=${dir === "/" ? "/" : dir + "/"}${a[a.length-1]}`))
     },
 })
 
