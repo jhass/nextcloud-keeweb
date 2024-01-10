@@ -7,7 +7,7 @@
     <description>Open Keepass stores inside Nextcloud with Keeweb just by clicking on an *.kdbx file in your
         Nextcloud.
     </description>
-    <version>0.6.14</version>
+    <version>0.6.15</version>
     <licence>agpl</licence>
     <author>Jonne Haß, Arno Welzel, Florian Forestier</author>
     <namespace>Keeweb</namespace>
