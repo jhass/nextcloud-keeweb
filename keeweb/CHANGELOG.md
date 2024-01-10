@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.15)
+* Fix opening files in case the Nextcloud base URL is not using the path "/" (@florian-forestier)
+
 nextcloud-keeweb (0.6.14)
 * Updated application to fix compatibility with Nextcloud 28 (thanks @florian-forestier)
 
