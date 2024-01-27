@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.16)
+* Added deprecation warning since KeeWeb upstream is not maintained since 2021.
+
 nextcloud-keeweb (0.6.15)
 * Fix opening files in case the Nextcloud base URL is not using the path "/" (@florian-forestier)
 
