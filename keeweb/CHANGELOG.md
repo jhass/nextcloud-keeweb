@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.17)
+* Fixed store description
+
 nextcloud-keeweb (0.6.16)
 * Added deprecation warning since KeeWeb upstream is not maintained since 2021.
 
