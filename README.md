@@ -1,5 +1,7 @@
 # Keeweb for Nextcloud
 
+**WARNING: KeeWeb itself is not maintained any longer (see note about NC 28 and newer below) and future versions of Nextcloud may not be supported any longer!**
+
 [Nextcloud](https://nextcloud.com/) is an open source, self-hosted file sync and share and communication app platform.
 [Keeweb](https://keeweb.info/) is a web application for working with databases of the Keepass password manager.
 
