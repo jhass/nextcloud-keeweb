@@ -7,7 +7,7 @@
     <description>
 Open Keepass stores inside Nextcloud with Keeweb just by clicking on an *.kdbx file in your Nextcloud.
         
-💀 KeeWeb itself not actively maintained since 2021 and may contain security issues 💀 Please move to an actively maintained developed app like Passman or Passwords.
+WARNING: As of March 2024 KeeWeb itself was not actively maintained since 2021 and may contain security issues. You may consider to choose an actively maintained developed app like Passman or Passwords. If this changes in the future, this notice will be updated accordingly.
     </description>
     <version>0.6.17</version>
     <licence>agpl</licence>
