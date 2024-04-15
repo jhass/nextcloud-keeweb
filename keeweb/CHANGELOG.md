@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.18)
+* Updated store description to reflect the possibilty of ongoing maintainenance in the upstream.
+
 nextcloud-keeweb (0.6.17)
 * Fixed store description
 
