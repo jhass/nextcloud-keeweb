@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.19)
+* Updated Nextcloud compatibility information and store description about the upstream status.
+
 nextcloud-keeweb (0.6.18)
 * Updated store description to reflect the possibilty of ongoing maintainenance in the upstream.
 

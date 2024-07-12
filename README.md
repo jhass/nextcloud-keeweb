@@ -17,9 +17,12 @@ This integrates the two with each other. Just click on a \*.kdbx file in Your Ne
 
 Thanks to the help by @florian-forestier, in January 2024 a new release was published which supports Nextcloud 28.
 
-However the upstream project "KeeWeb" itself is not maintained any longer - so if you can help, please have a look at
-https://github.com/jhass/nextcloud-keeweb/issues/204 (KeeWeb upstream maintenance) and/or
+However as of July 2024 the upstream project "KeeWeb" did not get any official new release since
+July 2021 (also see https://github.com/keeweb/keeweb/releases).
+
+You may have a look at https://github.com/jhass/nextcloud-keeweb/issues/204 (KeeWeb upstream maintenance) and/or
 https://github.com/jhass/nextcloud-keeweb/issues/221 (Maintainers for KeeWeb for Nextcloud).
+
 Any help is appreciated!
 
 ## Install
