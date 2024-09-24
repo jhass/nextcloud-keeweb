@@ -15,8 +15,7 @@ const fileAction = new FileAction({
         return nodes.filter((node) => (node.permissions & Permission.READ !== 0 && node.mime ==="application/x-kdbx")).length > 0
     },
     async exec(node, view, dir) {
-        let a = node.source.split("/")
-        OC.redirect(generateUrl(`/apps/keeweb/?open=${dir === "/" ? "/" : dir + "/"}${a[a.length-1]}`))
+        OC.redirect(generateUrl('/apps/keeweb/?open={path}', { path: node.path }))
     },
 })
 
