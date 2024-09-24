@@ -1,3 +1,7 @@
+nextcloud-keeweb (0.6.20)
+* Fixed path handling in file action (@ShGKme)
+* Updated Nextcloud compatibility information.
+
 nextcloud-keeweb (0.6.19)
 * Updated Nextcloud compatibility information and store description about the upstream status.
 
