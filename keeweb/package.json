@@ -6,7 +6,7 @@
     "build": "NODE_ENV=production webpack --progress --config webpack.js"
   },
   "dependencies": {
-    "@nextcloud/files": "^3.0.0",
+    "@nextcloud/files": "^3.12.2",
     "@nextcloud/webpack-vue-config": "^6.0.0",
     "@nextcloud/browserslist-config": "^3.0.0"
   },
