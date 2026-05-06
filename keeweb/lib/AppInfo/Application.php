@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * Nextcloud - keeweb
  *
@@ -10,43 +12,36 @@
  */
 
 namespace OCA\Keeweb\AppInfo;
-use OCA\Keeweb\Controller\PageController;
+
 use OCP\AppFramework\App;
-use OCP\Util;
-use Psr\Container\ContainerInterface;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\Files\IMimeTypeDetector;
+use OCP\IRequest;
+use OCP\Util;
 
-class Application extends App {
-    public function __construct(){
-        $appName = "keeweb";
+class Application extends App implements IBootstrap {
+    public const APP_ID = 'keeweb';
 
-        parent::__construct($appName);
-
-        if (array_key_exists("REQUEST_URI", \OC::$server->getRequest()->server))
-        {
-            $url = \OC::$server->getRequest()->server["REQUEST_URI"];
-            if (isset($url)) {
-                if (preg_match("%/apps/files(/.*)?%", $url) || str_contains($url, "/s/")) // Files app and file sharing
-                {
-                    Util::addScript($appName, "viewer");
-                }
-            }
-        }
-
-        $context = $this->getContainer();
-        $context->registerService('PageController', function (ContainerInterface $c) {
-            return new PageController(
-                $c->query('AppName'),
-                $c->query('Request'),
-                $c->query('ServerContainer')->getURLGenerator(),
-                $c->query('Config')
-            );
-        });
-
-        $detector = $context->query(IMimeTypeDetector::class);
-        $detector->getAllMappings();
-        $detector->registerType("kdbx", "application/x-kdbx");
-
+    public function __construct() {
+        parent::__construct(self::APP_ID);
     }
 
+    public function register(IRegistrationContext $context): void {
+        // Controllers are auto-wired by the AppFramework, no manual
+        // service registration needed.
+    }
+
+    public function boot(IBootContext $context): void {
+        $context->injectFn(function (IMimeTypeDetector $detector, IRequest $request): void {
+            $detector->getAllMappings();
+            $detector->registerType('kdbx', 'application/x-kdbx');
+
+            $url = $request->getRequestUri();
+            if ($url !== '' && (preg_match('%/apps/files(/.*)?%', $url) || str_contains($url, '/s/'))) {
+                Util::addScript(self::APP_ID, 'viewer');
+            }
+        });
+    }
 }
