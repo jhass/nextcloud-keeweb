@@ -1,5 +1,5 @@
 nextcloud-keeweb (0.6.23) — intresrl fork
-* Compatibility with Nextcloud 33 (max-version bumped to 34).
+* Compatibility with Nextcloud 33 (min-version raised to 33, max-version bumped to 34).
 * Migrated `AppInfo\Application` to the `IBootstrap` pattern required by NC 30+.
 * Replaced `@NoAdminRequired` / `@NoCSRFRequired` doc annotations with PHP 8 attributes.
 * Modernised `PageController` dependency injection (constructor property promotion, removed `\OC::$server` access, injected `CsrfTokenManager`).
@@ -7,6 +7,7 @@ nextcloud-keeweb (0.6.23) — intresrl fork
 * Fixed operator-precedence bug in the file-action `enabled()` permission check.
 * Closed `<iframe>` tag explicitly in `templates/main.php` (HTML5 compliance).
 * Raised `php min-version` to 8.1.
+* Tested on NC 29 and NC 30: PHP backend installs correctly, but the `@nextcloud/files` v4 file-action registry is not available on those versions, so the file action does not work. NC 33 is the minimum supported version.
 
 nextcloud-keeweb (0.6.22)
 * Updated dependencies

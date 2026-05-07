@@ -21,7 +21,7 @@ WARNING: As of September 2025 KeeWeb itself did not get any new release since 20
     <screenshot>https://arnowelzel.de/download/nextcloud-keeweb.gif</screenshot>
     <dependencies>
         <php min-version="8.1"/>
-        <nextcloud min-version="29" max-version="34"/>
+        <nextcloud min-version="33" max-version="34"/>
     </dependencies>
     <repair-steps>
         <install>
