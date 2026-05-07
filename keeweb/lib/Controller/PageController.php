@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * Nextcloud - keeweb
  *
@@ -11,133 +13,118 @@
 
 namespace OCA\Keeweb\Controller;
 
+use OC\Security\CSRF\CsrfTokenManager;
+use OCA\Keeweb\AppInfo\Application;
+use OCP\App\IAppManager;
+use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
+use OCP\AppFramework\Http\DataDisplayResponse;
+use OCP\AppFramework\Http\EmptyContentSecurityPolicy;
+use OCP\AppFramework\Http\JSONResponse;
+use OCP\AppFramework\Http\TemplateResponse;
+use OCP\IConfig;
 use OCP\IRequest;
 use OCP\IURLGenerator;
-use \OCP\IConfig;
-use OCP\AppFramework\Http\TemplateResponse;
-use OCP\AppFramework\Http\DataDisplayResponse;
-use OCP\AppFramework\Http\JSONResponse;
-use OCP\AppFramework\Http\ContentSecurityPolicy;
-use OCP\AppFramework\Http\EmptyContentSecurityPolicy;
-use OCP\AppFramework\Controller;
-use OCP\App\IAppManager;
+use OCP\Util;
 
 class PageController extends Controller {
 
-	private $urlGenerator;
-	private $settings;
-	private $appManager;
-
 	public function __construct(
-		$AppName,
 		IRequest $request,
-		IURLGenerator $urlGenerator,
-		IConfig $settings,
-		IAppManager $appManager) {
-		parent::__construct($AppName, $request);
-		$this->urlGenerator = $urlGenerator;
-		$this->settings = $settings;
-		$this->appManager = $appManager;
+		private IURLGenerator $urlGenerator,
+		private IConfig $settings,
+		private IAppManager $appManager,
+		private CsrfTokenManager $csrfTokenManager,
+	) {
+		parent::__construct(Application::APP_ID, $request);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
-	public function index($open) {
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
+	public function index(?string $open = null): TemplateResponse {
 		$params = ['keeweb' => $this->urlGenerator->linkToRoute('keeweb.page.keeweb')];
-		if (isset($open)) {
-			$params['config'] = 'config?file='.urlencode($open);
-		} else {
-			$params['config'] = 'config';
-		}
-		$response = new TemplateResponse("keeweb", "main", $params);
-		// Override default CSP
+		$params['config'] = $open !== null
+			? 'config?file=' . urlencode($open)
+			: 'config';
+		$response = new TemplateResponse(Application::APP_ID, 'main', $params);
 		$response->setContentSecurityPolicy($this->getCSP());
 		return $response;
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
-	public function keeweb() {
-		$response = new TemplateResponse("keeweb", "keeweb", [], "blank");
-		// Override default CSP
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
+	public function keeweb(): TemplateResponse {
+		$response = new TemplateResponse(Application::APP_ID, 'keeweb', [], 'blank');
 		$response->setContentSecurityPolicy($this->getCSP());
 		return $response;
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
-	public function manifest() {
-		$params = ['keeweb' => $this->urlGenerator->linkToRoute('keeweb.page.keeweb'),
-							 'version' => $this->settings->getAppValue($this->appName, 'installed_version')];
-		$response = new TemplateResponse("keeweb", "manifest.appcache", $params, "blank");
-		$response->addHeader("Content-Type", "text/plain");
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
+	public function manifest(): TemplateResponse {
+		$params = [
+			'keeweb' => $this->urlGenerator->linkToRoute('keeweb.page.keeweb'),
+			'version' => $this->settings->getAppValue($this->appName, 'installed_version'),
+		];
+		$response = new TemplateResponse(Application::APP_ID, 'manifest.appcache', $params, 'blank');
+		$response->addHeader('Content-Type', 'text/plain');
 		return $response;
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
-	public function config($file) {
-		$csrfToken = \OC::$server->getCSRFTokenManager()->getToken()->getEncryptedValue();
-		$webdavBase = \OCP\Util::linkToRemote('webdav');
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
+	public function config(?string $file = null): JSONResponse {
+		$csrfToken = $this->csrfTokenManager->getToken()->getEncryptedValue();
+		$webdavBase = Util::linkToRemote('webdav');
 		$config = ['settings' => (object) null];
-		if (isset($file)) {
+		if ($file !== null) {
 			$config['files'] = [
 				[
 					'storage' => 'webdav',
-					'name' => $file.' on '.$this->request->getServerHost(),
-					'path' => $this->joinPaths($webdavBase, $file.'?requesttoken='.urlencode($csrfToken)),
-					"options" => ['user' => null, 'password' => null]
-				]
+					'name' => $file . ' on ' . $this->request->getServerHost(),
+					'path' => $this->joinPaths($webdavBase, $file . '?requesttoken=' . urlencode($csrfToken)),
+					'options' => ['user' => null, 'password' => null],
+				],
 			];
 		}
 		return new JSONResponse($config);
 	}
 
-
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
-	public function serviceworker() {
-		$response = new DataDisplayResponse(file_get_contents(
-                  $this->joinPaths($this->appManager->getAppPath("keeweb"), "templates/service-worker.js")));
-		$response->addHeader("Content-Type", "application/javascript; charset=utf8");
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
+	public function serviceworker(): DataDisplayResponse {
+		$path = $this->joinPaths($this->appManager->getAppPath(Application::APP_ID), 'templates/service-worker.js');
+		$response = new DataDisplayResponse(file_get_contents($path));
+		$response->addHeader('Content-Type', 'application/javascript; charset=utf8');
 		$response->setContentSecurityPolicy($this->getCSP());
 		return $response;
 	}
 
-	private function joinPaths($base, $path) {
-		return rtrim($base, '/').'/'.ltrim($path, '/');
+	private function joinPaths(string $base, string $path): string {
+		return rtrim($base, '/') . '/' . ltrim($path, '/');
 	}
 
-	private function getCSP() {
+	private function getCSP(): EmptyContentSecurityPolicy {
 		$csp = new EmptyContentSecurityPolicy();
 		$csp->addAllowedFrameDomain("'self'");
 		$csp->addAllowedFrameDomain("'unsafe-inline'");
 		$csp->addAllowedFrameDomain("'unsafe-eval'");
-		$csp->addAllowedFrameDomain("blob:");
+		$csp->addAllowedFrameDomain('blob:');
 		$csp->addAllowedFrameAncestorDomain("'self'");
 		$csp->addAllowedStyleDomain("'self'");
 		$csp->addAllowedFontDomain("'self'");
-		$csp->addAllowedFontDomain("data:");
+		$csp->addAllowedFontDomain('data:');
 		$csp->addAllowedImageDomain("'self'");
-		$csp->addAllowedImageDomain("data:");
-		$csp->addAllowedImageDomain("blob:");
+		$csp->addAllowedImageDomain('data:');
+		$csp->addAllowedImageDomain('blob:');
 		$csp->addAllowedImageDomain('https://services.keeweb.info');
 		$csp->addAllowedScriptDomain("'self'");
 		$csp->addAllowedConnectDomain("'self'");
 		$csp->addAllowedConnectDomain('https://services.keeweb.info');
 		$csp->addAllowedScriptDomain('https://plugins.keeweb.info');
 		$csp->addAllowedScriptDomain("'unsafe-inline'");
-		$csp->addAllowedScriptDomain("blob:");
+		$csp->addAllowedScriptDomain('blob:');
 		$csp->addAllowedConnectDomain('https://plugins.keeweb.info');
 		$csp->allowEvalScript(true);
 		$csp->allowInlineStyle();

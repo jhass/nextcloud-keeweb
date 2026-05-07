@@ -10,3 +10,4 @@ keeweb/js/viewer.js.map
 keeweb/js/viewer.js.LICENSE.txt
 keeweb/node_modules/
 .idea/
+.DS_Store
