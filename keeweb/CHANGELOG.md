@@ -1,4 +1,4 @@
-nextcloud-keeweb (0.6.23) — intresrl fork
+nextcloud-keeweb (0.6.23)
 * Compatibility with Nextcloud 33 (min-version raised to 33, max-version bumped to 34).
 * Migrated `AppInfo\Application` to the `IBootstrap` pattern required by NC 30+.
 * Replaced `@NoAdminRequired` / `@NoCSRFRequired` doc annotations with PHP 8 attributes.
