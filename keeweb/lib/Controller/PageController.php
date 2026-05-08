@@ -77,7 +77,7 @@ class PageController extends Controller {
 	public function config(?string $file = null): JSONResponse {
 		$csrfToken = $this->csrfTokenManager->getToken()->getEncryptedValue();
 		$webdavBase = Util::linkToRemote('webdav');
-		$config = ['settings' => (object) null];
+		$config = ['settings' => ['allowIframes' => true]];
 		if ($file !== null) {
 			$config['files'] = [
 				[
