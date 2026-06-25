@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace OCA\Keeweb\Controller;
 
 use OC\Security\CSRF\CsrfTokenManager;
+use OC\Security\CSP\ContentSecurityPolicyNonceManager;
 use OCA\Keeweb\AppInfo\Application;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Controller;
@@ -36,6 +37,7 @@ class PageController extends Controller {
 		private IConfig $settings,
 		private IAppManager $appManager,
 		private CsrfTokenManager $csrfTokenManager,
+		private ContentSecurityPolicyNonceManager $nonceManager,
 	) {
 		parent::__construct(Application::APP_ID, $request);
 	}
@@ -66,6 +68,7 @@ class PageController extends Controller {
 		$params = [
 			'keeweb' => $this->urlGenerator->linkToRoute('keeweb.page.keeweb'),
 			'version' => $this->settings->getAppValue($this->appName, 'installed_version'),
+			'nonce' => $this->nonceManager->getNonce(),
 		];
 		$response = new TemplateResponse(Application::APP_ID, 'manifest.appcache', $params, 'blank');
 		$response->addHeader('Content-Type', 'text/plain');
@@ -126,7 +129,7 @@ class PageController extends Controller {
 		$csp->addAllowedScriptDomain("'unsafe-inline'");
 		$csp->addAllowedScriptDomain('blob:');
 		$csp->addAllowedConnectDomain('https://plugins.keeweb.info');
-		$csp->allowEvalScript(true);
+		$csp->addAllowedScriptDomain("'unsafe-eval'");
 		$csp->allowInlineStyle();
 		return $csp;
 	}
