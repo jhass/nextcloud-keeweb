@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.24)
+* Fixed deprecated code for Nextcloud 34
+
 nextcloud-keeweb (0.6.23)
 * Compatibility with Nextcloud 33 (min-version raised to 33, max-version bumped to 34).
 * Migrated `AppInfo\Application` to the `IBootstrap` pattern required by NC 30+.
