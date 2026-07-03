@@ -39,5 +39,5 @@ NODE_OPTIONS=--openssl-legacy-provider npx grunt build-web-app --skip-sign --for
 cp -v dist/index.html ../keeweb/templates/keeweb.php
 cp -v dist/service-worker.js ../keeweb/templates/
 sed -i -e 's|<?|<?php echo "<?"; ?>|g' ../keeweb/templates/keeweb.php
-sed -i -e 's|><script>|><script nonce="<?php p(\OC::$server->getContentSecurityPolicyNonceManager()->getNonce()); ?>">|g' ../keeweb/templates/keeweb.php
+sed -i -e 's|><script>|><script nonce="<?php p(\OC::$server->get(\\OC\\Security\\CSP\\ContentSecurityPolicyNonceManager::class)->getNonce()); ?>">|g' ../keeweb/templates/keeweb.php
 sed -i -e 's/<meta http-equiv="Content-Security-Policy" .[^>]*>//g' ../keeweb/templates/keeweb.php
