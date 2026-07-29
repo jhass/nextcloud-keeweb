@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.26)
+* Updated dependencies
+
 nextcloud-keeweb (0.6.25)
 * Fixed deprecated code in runtime template for Nextcloud 34
 
