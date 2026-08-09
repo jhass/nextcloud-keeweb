@@ -1,3 +1,6 @@
+nextcloud-keeweb (0.6.27)
+* Updated dependencies
+
 nextcloud-keeweb (0.6.26)
 * Updated dependencies
 
