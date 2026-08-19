@@ -1,3 +1,7 @@
+nextcloud-keeweb (0.6.28)
+* Updated dependencies
+* Fix viewer.js loading with Nextcloud 34 bootstrap (thanks to Grizouille38)
+
 nextcloud-keeweb (0.6.27)
 * Updated dependencies
 
