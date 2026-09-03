@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@nextcloud/files": "^3.12.2",
-    "@nextcloud/webpack-vue-config": "^6.0.0",
+    "@nextcloud/webpack-vue-config": "^7.0.4",
     "@nextcloud/browserslist-config": "^3.0.0"
   },
   "browserslist": [
