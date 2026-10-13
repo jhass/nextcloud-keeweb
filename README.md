@@ -10,6 +10,10 @@ https://github.com/keeweb/keeweb/issues/2022 is still not closed and there is al
 see [https://github.com/keeweb/keeweb/issues/2001](https://github.com/keeweb/keeweb/issues/2001)! So keep your files in KDBX 3 format if you want to
 use them in KeeWeb as well!**
 
+**Since the situation did not change in October 2026, this application is considered obsolete and will no longer be maintained and there will not be any updates for Nextcloud 35 or newer since no one is maintaining the upstream application. Also see the announcement at [https://help.nextcloud.com/t/future-of-keeweb-for-nextcloud/246223](https://help.nextcloud.com/t/future-of-keeweb-for-nextcloud/246223).**
+
+----
+
 [Nextcloud](https://nextcloud.com/) is an open source, self-hosted file sync and share and communication app platform.
 [Keeweb](https://keeweb.info/) is a web application for working with databases of the Keepass password manager.
 
